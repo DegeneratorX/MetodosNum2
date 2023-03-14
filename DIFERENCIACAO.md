@@ -20,4 +20,5 @@ Seja f(x) uma função sobre x.
 
 A derivada de f(x) é:
 
-$\center \Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\Delta x)-f(x_0)}{\Delta x}$
+$$\boxed{\Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\Delta x)-f(x_0)}{\Delta x}}$$
+
