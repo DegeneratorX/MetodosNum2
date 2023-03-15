@@ -28,7 +28,7 @@ Ora, se a tg do ângulo é o cateto oposto sobre o cateto adjacente, então temo
 
 $$\boxed{\Large \frac{f(x_0+\Delta x) - f(x_0)}{\Delta x}}$$
 
-Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pra frente (forward) e vira a inclinação da reta tangente (tange o gráfico).
+Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pra frente (forward) e vira a inclinação da reta tangente (tange o gráfico). Isso porque com $\Delta x$ tendendo a zero, temos que de forma ultra microscópica, a curva do gráfico vira uma reta e coincide com a reta r no ponto tangente.
 
 > Nota: esse é o tipo mais utilizado no cálculo diferencial e integral.
 
