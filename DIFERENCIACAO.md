@@ -54,6 +54,8 @@ $$\boxed{\Large f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0 - \D
 
 ![](2023-03-15-12-02-23.png)
 
+Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pro meio (central) e vira a inclinação da reta tangente (tange o gráfico).
+
 ### Exemplo
 
 $f(x) = \sin x$
