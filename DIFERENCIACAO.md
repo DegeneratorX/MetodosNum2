@@ -1,14 +1,14 @@
 # Ementa
 
-Unidade 1: Diferenciação
-Unidade 2: Integração
-Unidade 3: Autovalores e Autovetores
-Unidade 4: Problemas de Valores Iniciais
-Unidade 5: Problemas de Valores de Contorno
+- Unidade 1: Diferenciação
+- Unidade 2: Integração
+- Unidade 3: Autovalores e Autovetores
+- Unidade 4: Problemas de Valores Iniciais
+- Unidade 5: Problemas de Valores de Contorno
 
-Prova 1: Unidade 1 e 2
-Prova 2: Unidade 3
-Prova 3: Unidades 4 e 5
+- Prova 1: Unidade 1 e 2
+- Prova 2: Unidade 3
+- Prova 3: Unidades 4 e 5
 
 # Diferenciação
 
