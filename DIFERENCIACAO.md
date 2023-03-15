@@ -22,3 +22,8 @@ A derivada de f(x) é:
 
 $$\boxed{\Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\Delta x)-f(x_0)}{\Delta x}}$$
 
+![](2023-03-15-10-34-57.png)
+
+Ora, se a tg do ângulo é o cateto oposto sobre o cateto adjacente, então temos
+
+$$\boxed{\Large \frac{f(x_0+\Delta x) - f(x_0)}{\Delta x}}
