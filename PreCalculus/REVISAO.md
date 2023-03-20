@@ -91,3 +91,116 @@ Vídeo de animação das 6 funções trigonométricas principais:
 https://youtu.be/Dsf6ADwJ66E
 
 ![](2023-03-17-16-40-19.png)
+
+# Produtos Notáveis e Fatoração
+
+![](2023-03-20-09-16-38.png)
+
+![](2023-03-20-09-22-45.png)
+
+# Limite
+
+A definição informal de **limite** é a previsão de qual é o valor aproximado de y (L) que conseguimos quando aproximamos x a um valor qualquer (a).
+
+$$\Large\boxed{\lim_{x \to a} f(x) = L}$$
+
+## Limite pelos dois lados
+
+Suponha o gráfico a seguir:
+
+![](2023-03-20-09-45-09.png)
+
+É totalmente possível que exista um buraco no gráfico onde não sabemos o valor das coordenadas em que a função passa. Porém, podemos fazer uma projeção aproximada usando limites. A notação abaixo:
+
+$$\lim_{x \to 1} f(x) = 2$$
+
+Representa um resultado aproximado de y quando o valor de x se desloca para 1 de forma cada vez mais infinitesimal. Implicitamente isso ocorre tanto pela esquerda quanto pela direita, mas é possível representar esse desclocamento de forma individual, será abordado mais abaixo.
+
+Porém, $f(1)$ é indeterminado. Não sabemos o valor exato.
+
+Mesmo que soubessemos o valor de $f(1)$, não importa, o limite continuaria sendo 2, pois o limite estuda o que está ao redor do gráfico, e não no exato ponto.
+
+![](2023-03-20-11-28-55.png)
+
+## Limite por lados individuais
+
+Não muito comum, mas é possível representar o limite de forma que x se aproxima pela esquerda ou pela direita apenas, e isso é mais utilizado quando temos um gráfico assim:
+
+![](2023-03-20-11-40-05.png)
+
+$\boxed{\lim_{x \to 2^-} f(x) = 3}$, $\boxed{\lim_{x \to 2^+} f(x) = 4}$
+
+Quando temos limites quando x se aproximando da direita e da esquerda dão resultados diferentes, significa que o **limite não existe** (DNE = Does Not Exist). Ou seja:
+
+$$\boxed{\lim_{x \to 2} f(x) = DNE}$$
+
+## Limite pro infinito
+
+É possível aproximar o valor de x para o infinito para descobrirmos um valor finito correspondente em uma função $f$. Porém, o contrário é DNE.
+
+![](2023-03-20-11-50-07.png)
+
+$\boxed{\lim_{x \to +\infty} f(x) = 0}$, $\boxed{\lim_{x \to -\infty} f(x) = -1}$
+
+> Nota: quando o resultado do limite tender ao infinito (ou seja, divisão por zero), também é **DNE** Exemplo: $\lim_{x \to 0} f(x) = \frac{1}{0} = DNE$. Significa que não temos um resultado finito, e no gráfico o $f(x)$ tende ao infinito quando x é igual a zero.
+
+# Resolução de Limites
+
+Existem 7 formas principais pra se resolver problemas com limites.
+
+## 1 - Plug in (substituição)
+
+Simplesmente coloca o valor para onde x se aproxima no polinômio.
+
+Esse é sempre o primeiro passo a se fazer ao ver um polinômio com função limite.
+
+$\large\lim_{x \to 4} \frac{x^2-2x-3}{x^2-9} = \frac{4^2 - 2(4) - 3}{4^2-9} = \boxed{\frac{5}{7}}$
+
+$\large\lim_{x \to 0} \sqrt{36-x^2} = \sqrt{36-0^2} = \boxed{6}$
+
+## 2 - Fatoração
+
+Nem sempre é possível fazer plug in de cara.
+
+$\large\lim_{x \to 3} \frac{x^2-2x-3}{x^2-9} = \frac{3^2 - 2(3) - 3}{3^2-9} = \frac{0}{0}$
+
+Isso não significa DNE. Só seria o caso de DNE se não tivesse outra forma de simplificar o polinômio.
+
+Como sabemos que o **denominador não será exatamente zero**, pois x não é 3, mas muito próximo de 3, é possível fazer cancelamentos do numerador com o denominador usando fatorações.
+
+$\large\lim_{x \to 3} \frac{x^2-2x-3}{x^2-9} = \lim_{x \to 3} \frac{\cancel{(x-3)}(x+1)}{(x+3)\cancel{(x-3)}} = \lim{x \to 3}\frac{x+1}{x+3} = \frac{3+1}{3+3} = \boxed{\frac{2}{3}}$
+
+É possível que mesmo fatorando, não seja possível encontrar a solução e resultar em DNE.
+
+$\lim_{x \to -1} \frac{x^2+2x-8}{x^2+5x+4} = \lim_{x \to -1} \frac{\cancel{(x+4)}(x-2)}{\cancel{(x+4)}(x+1)} = \lim_{x \to -1} \frac{x-2}{x+1} = \frac{-1-2}{-1+1} = \frac{-3}{0} = \boxed{DNE}$
+
+## 3 - Denominador Comum
+
+Quando temos muitas frações, as vezes é possível fazer denominador comum (mmc) para simplificar o cálculo.
+
+$\large\lim_{x \to 0} \frac{\frac{1}{x+2}-\frac{1}{2}}{x}$
+
+**Método 1, plug in falha ($\frac{0}{0}$)**.
+**Método 2, impossível fatorar algo**.
+
+O jeito é usar o denominador comum e se livrar das frações o máximo que puder.
+
+Lembrando, pra fazer o denominador comum, se for números é MMC, se for polinômios, basta multiplicar eles entre si e fatorar se possível. Divide o denominador comum pelo denominador de cima, e multiplica pelo numerador. Assim:
+
+![](2023-03-20-13-01-01.png)
+
+Resultando em:
+
+$\large = \lim_{x \to 0} \frac{\frac{2-x-2}{2(x+2)}}{x}$
+
+E continuando a álgebra...
+
+$\large = \lim_{x \to 0} \frac{\frac{-x}{2(x+2)}}{x} = \lim_{x \to 0} \frac{-x}{2(x+2)}\cdot \frac{1}{x} = \lim_{x \to 0} \frac{-1}{2(x+2)} = \frac{-1}{2(0+2)} = \boxed{\frac{-1}{4}}$
+
+## 4 - Abrir os parênteses (abrir e depois simplificar)
+
+É possível que os 3 métodos anteriores falhem. No caso se houver como fazer álgebra em torno de valores, podemos tentar fatorar algo depois que torne possível a resolução do problema.
+
+$\large \lim_{x \to 0} \frac{(x+2)^2-4}{x} = \lim_{x \to 0} \frac{x^2+4x+4-4}{x} = \lim_{x \to 0} \frac{x^2+4x}{x} = \lim_{x \to 0} \frac{\cancel{x}(x+4)}{\cancel{x}} = \lim_{x \to 0} (x+4) = \boxed{4}$
+
+Existem mais 3 outros métodos envolvendo radiciação, senos e módulo, porém não vou abordar aqui agora. Só se houver necessidade.
