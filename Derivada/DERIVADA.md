@@ -18,7 +18,7 @@ Se fosse uma reta no lugar dessa curva, teriamos facilmente o valor da distânci
 
 E assim obtemos a relação de cateto oposto sobre adjacente para achar a distância de A para B, e isso vale pra qualquer ponto da reta, que é o coeficiente angular:
 
-$$\Large\boxed{m = \tg \alpha = \frac{y_B-y_A}{x_B-x_A} = \frac{\Delta y}{\Delta x}}$$
+$$\Large\boxed{m = \tan \alpha = \frac{y_B-y_A}{x_B-x_A} = \frac{\Delta y}{\Delta x}}$$
 
 O problema é que não dá pra saber para todos os pontos de uma curva a inclinação da reta tangente, pois para todo ponto, a tangente muda a todo instante.
 
@@ -87,7 +87,7 @@ E pra saber o ponto que essa tangente está e o quão inclinada ela é, basta su
 
 Substituindo as coordenadas x_0 e y_0 (pois temos o ponto inicial) baseados no par ordenado, e $m$ pelo resultado da função derivada, temos:
 
-$\Large y-39 = 18(x-3) \Rightarrow y = 18x - 54 + 39 \Rightarrow y = 18x - 15$
+$\large y-39 = 18(x-3) \Rightarrow y = 18x - 54 + 39 \Rightarrow y = 18x - 15$
 
 A reta tangente ao ponto $(3,39)$ da parábola segue a função $y = 18x - 15$. Ou seja, sabemos a inclinação a partir disso e sabemos visualmente onde a tangente toca visualmente no gráfico no ponto $x = 3$.
 
@@ -95,11 +95,11 @@ A reta tangente ao ponto $(3,39)$ da parábola segue a função $y = 18x - 15$. 
 
 Outro exemplo prático, suponha que eu quero a inclinação da reta tangente no ponto $x = 0.3$.
 
-Fazendo $f(0.3)$ e $f'(0.3)$, obtemos 12.27 e 1.8. Sabendo que o par ordenado da tangente é$(x_0,y_0) = (0.3,12.27)$ e o coeficiente $m$ no limite é 1.8, substituindo na equação do coeficiente angular da reta, temos:
+Fazendo $f(0.3)$ e $f'(0.3)$, obtemos 12.27 e 1.8. Sabendo que o par ordenado da tangente é $(x_0,y_0) = (0.3,12.27)$ e o coeficiente $m$ no limite é 1.8, substituindo na equação do coeficiente angular da reta, temos:
 
-$\Large y-12.27 = 1.8(x-0.3) \Rightarrow y = 1.8x - 0.54 + 12.27 \Rightarrow y = 1.8x + 11.73
+$\large y-12.27 = 1.8(x-0.3) \Rightarrow y = 1.8x - 0.54 + 12.27 \Rightarrow y = 1.8x + 11.73$
 
-Ou seja, a reta tangente ao ponto $(0.3,12.27) da parábola segue a função $y = 1.8x + 11.73$, que por sua vez é essa reta que toca tangenciando esse ponto do gráfico:
+Ou seja, a reta tangente ao ponto $(0.3,12.27)$ da parábola segue a função $y = 1.8x + 11.73$, que por sua vez é essa reta que toca tangenciando esse ponto do gráfico:
 
 ![](2023-03-22-12-59-05.png)
 
@@ -151,3 +151,119 @@ Observe que na vértice da parábola, a tangente (em verde) é justamente uma li
 Essa é a ideia de tangentes em pontos infinitesimais de uma curva.
 
 O fato da parábola ser crescente cada vez mais tem a ver com o fato de que quanto maior a velocidade, mais espaço será percorrido durante um intervalo de tempo estimado.
+
+# Regras (atalhos) de derivação
+
+## Regra da Potência
+
+A regra da potência consiste em pegar um termo de uma função, multiplicar o termo pelo seu expoente e subtrair -1 da potência. Assim:
+
+$$\Large \boxed{\frac{d}{dx}(x^n) = nx^{n-1}}$$
+
+Fazendo termo a termo de uma função $f$, quando possível, acharemos a derivada da função.
+
+### Exemplo: ache a derivada de $f(x) = x^4 + 2x^3 - x^2 + 4x -1$
+
+**Solução:**
+
+$f'(x) = 4x^{4-1}+3\cdot 2x^{3-1}-2\cdot x^{2-1}+1\cdot 4x^{1-1}-\cancel{0\cdot 1x^{0-1}}$
+
+$\boxed{f'(x) = 4x^3+6x^2-2x+4}$
+
+### Exemplo 2: ache a derivada de $f(x) = x^{-2}$ e $g(x) = x^{\frac{4}{3}}$
+
+**Solução:**
+
+$f'(x) = -2x^{-3}$
+
+$g'(x) = \frac{4}{3}x^{\frac{4}{3}-1} = \frac{4}{3}x^{\frac{1}{3}}$
+
+### Exemplo 3: convenções
+
+$\frac{d}{dx}(cx) = c$
+
+$\frac{d}{dx}(x) = 1$
+
+$\frac{d}{dx}(c) = 0$
+
+>Nota: $c$ é uma constante.
+
+## Regra do Produto
+
+Quando tem uma função com termos fatorados do tipo $(u)(v)$, ou duas funções multiplicando $f(x)\cdot g(x)$, usamos a regra do produto, que consiste no produto do primeiro termo original pela derivada da segunda, isso somando com o produto do segundo termo orignal pela derivada da primeira.
+
+$$\Large \boxed{\frac{d}{dx}(u\cdot v) = u\frac{dv}{dx}+v\frac{du}{dx}}$$
+
+$$\Large \boxed{\frac{d}{dx}(f(x)\cdot g(x)) = f(x)\cdot g'(x) + g(x)\cdot f'(x)}$$
+
+### Exemplo: calcule a derivada de y = (x^2+1)(x^3+x+5)
+
+**Solução**
+
+$\frac{dy}{dx} = (x^2+1)(3x^2+1)+(x^3+x+5)(2x)$
+
+$\frac{dy}{dx} = 5x^4 + 6x^2 + 10x + 1$
+
+## Regra do Quociente
+
+Quando tem uma função com divisão de polinômios, podemos derivar usando a regra do quociente baseado nessa fórmula:
+
+$$\Large \boxed{\frac{d}{dx}(\frac{u}{v}) = \frac{v\frac{du}{dx}-u\frac{dv}{dx}}{v^2}}$$
+
+$$\Large \boxed{\frac{d}{dx}[\frac{f(x)}{g(x)}] = \frac{g(x)f'(x)-f(x)g'(x)}{[g(x)]^2}}$$
+
+se $v \neq 0$ e $g(x)\neq 0$.
+
+### Exemplo: ache a derivada de $f(x) = \frac{x^2+1}{3x-2}$
+
+**Solução**
+
+$f'(x) = \frac{(3x-2)(2x) - (x^2+1)(3)}{(3x-2)^2}$
+
+$= \frac{6x^2-4x-3x^2-3}{(3x-2)^2} = \boxed{\frac{3x^2-4x-3}{(3x-2)^2}}$
+
+## Regra da Cadeia
+
+A regra da cadeia consiste na seguinte regra:
+
+$$\Large \boxed{y = f[g(x)] \Rightarrow y' = f'[g(x)]\cdot g'(x)}$$
+
+$$\Large \boxed{y = f(u), u = g(x) \Rightarrow \frac{dy}{dx} = \frac{dy}{du}\cdot \frac{du}{dx}}$$
+
+> Nota: os dois são a mesma coisa, assim como nas regras anteriores. São apenas duas formas de representar.
+
+Basicamente deriva o que estiver fora da função, deixando o que tiver dentro em paz. Depois multiplica pela derivada do que tiver dentro.
+
+### Exemplo 1: achar a derivada de $y = (3x+1)^7$
+
+**Solução**
+
+Perceba uma função implícita dentro da outra.
+
+$\frac{dy}{dx} = 7(3x+1)^6\cdot 3 = \boxed{21(3x+1)^6}$
+
+### Exemplo 2: achar a derivada de $y = \sin (x^2-3x)$
+
+Funções trigonométricas, logaritmicas, exponenciais, tudo isso são aplicadas as regras da cadeia. $sin x$ não há necessidade de aplicar a regra (ou pode, mas é redundante). Mas a partir do momento que você tem $\sin x^2$ ou $\sin 3x$, já se tem funções implicitas em cadeia (daí o nome).
+
+**Solução**
+
+$\boxed{\frac{dy}{dx} = \cos (x^2-3x)(2x-3)}$
+
+### Exemplo 3: funções nested, achar a derivada de $y = (1+\cos 2x)^2$
+
+Nesse caso aqui temos um emaranhado de funções, pelo menos 3 uma dentro das outras. Pra isso, a regra da cadeia vai derivando tudo.
+
+$y' = 2(\cos (2x)+1)\cdot (\frac{d}{dx}[\cos (2x)] + \frac{d}{dx}1)$
+
+$= 2(\cos (2x)+1)\cdot ((-\sin (2x))\cdot \frac{d}{dx}(2x)+0)$
+
+$= -2(\cos (2x)+1)\cdot 2 \cdot \frac{d}{dx}(x)\sin (2x) = \boxed{y' = -4(1+\cos 2x)\sin 2x}$
+
+### Exemplo 4: funções diversas
+
+$e^{3x}$, $\ln{5x}$, $\sqrt{x^2+1} = (x^2+1)^{1/2}$ são alguns exemplos de funções que é possível aplicar a regra da cadeia.
+
+# Tabela de derivadas
+
+![](2023-03-22-16-43-31.png)
