@@ -79,15 +79,31 @@ Portanto, a derivada de $3x^2 + 12$ é $6x$. O que isso nos diz? Basicamente diz
 
 Pra saber a taxa de variação naquele ponto $x$, usa-se portanto a inclinação da linha tangente naquele ponto, substituindo $x$ da função derivada.
 
-Suponha que eu substitua $x$ por 3. $f'(x) = 6 \cdot 3 = 18$. O que 18 nos diz? Representa a inclinação da reta tangente no gráfico da função $f(x) = 3x^2 + 12$ no ponto $x = 3$. O valor 18 em si no gráfico diz o quão a função tá mudando em uma posição particular. Nesse caso, a função tá mudando bastante com $x = 3$, indicado pelo fato de que a inclinação da reta tangente deu 18. Ou seja, significa que no ponto $x = 3$, a função original tá mudando em uma variação de 18 unidades de y por unidade de x.
+Suponha que eu substitua $x$ por 3 em $f'$. $f'(x) = 6 \cdot 3 = 18$. O que 18 nos diz? Representa a inclinação da reta tangente no gráfico da função $f(x) = 3x^2 + 12$ no ponto $x = 3$. O valor 18 em si no gráfico diz o quão a função tá mudando em uma posição particular. Nesse caso, a função tá mudando bastante com $x = 3$, indicado pelo fato de que a inclinação da reta tangente deu 18. Ou seja, significa que no ponto $x = 3$, a função original tá mudando em uma variação de 18 unidades de y por unidade de x.
 
 Ou seja, o valor da derivada em um ponto particular diz a taxa de variação instantânea em um ponto, e a inclinação da reta tangente no gráfico naquele ponto representa visualmente a variação de mudança.
 
-E pra saber o ponto que essa tangente está e o quão inclinada ela é, basta substituir 3 na função f(x), que resulta em 39. Ou seja, no par ordenado $(3,39) está localizada uma tangente a nossa escolha no ponto $x = 3$. Sabendo agora do par ordenado, vamos usar a fórmula do coeficiente angular: $(y-y_0) = m(x-x_0)$, afinal essa tangente é uma reta.
+E pra saber o ponto que essa tangente está e o quão inclinada ela é, basta substituir 3 na função f(x), que resulta em 39. Ou seja, no par ordenado $(3,39)$ está localizada uma tangente a nossa escolha no ponto $x = 3$. Sabendo agora do par ordenado, vamos usar a fórmula do coeficiente angular: $(y-y_0) = m(x-x_0)$, afinal essa tangente é uma reta.
 
-Substituindo as coordenadas x_0 e y_0 (pois temos o ponto inicial), temos:
+Substituindo as coordenadas x_0 e y_0 (pois temos o ponto inicial) baseados no par ordenado, e $m$ pelo resultado da função derivada, temos:
 
-$\Large y-39 = m(x-3) \Rightarrow y = 
+$\Large y-39 = 18(x-3) \Rightarrow y = 18x - 54 + 39 \Rightarrow y = 18x - 15$
+
+A reta tangente ao ponto $(3,39)$ da parábola segue a função $y = 18x - 15$. Ou seja, sabemos a inclinação a partir disso e sabemos visualmente onde a tangente toca visualmente no gráfico no ponto $x = 3$.
+
+![](2023-03-22-12-42-18.png)
+
+Outro exemplo prático, suponha que eu quero a inclinação da reta tangente no ponto $x = 0.3$.
+
+Fazendo $f(0.3)$ e $f'(0.3)$, obtemos 12.27 e 1.8. Sabendo que o par ordenado da tangente é$(x_0,y_0) = (0.3,12.27)$ e o coeficiente $m$ no limite é 1.8, substituindo na equação do coeficiente angular da reta, temos:
+
+$\Large y-12.27 = 1.8(x-0.3) \Rightarrow y = 1.8x - 0.54 + 12.27 \Rightarrow y = 1.8x + 11.73
+
+Ou seja, a reta tangente ao ponto $(0.3,12.27) da parábola segue a função $y = 1.8x + 11.73$, que por sua vez é essa reta que toca tangenciando esse ponto do gráfico:
+
+![](2023-03-22-12-59-05.png)
+
+### Exemplo 2: aplicação em física
 
 Basta imaginar que essa função $f$ é uma função que representa o espaço percorrido de um carro. Sabemos que a relação do espaço com a aceleração se dá por meio da fórmula:
 
@@ -116,7 +132,7 @@ E como não tem aceleração, a velocidade inicial é a mesma da final, portanto
 $$\boxed{x = x_0 + vt \Rightarrow v = \frac{\Delta x}{t}}$$
 
 
-### Exemplo 2: aplicação em física.
+### Exemplo 3: aplicação em física também
 
 Suponha uma função $f(x) = 3x^{2}-15x+24$. Sua derivada é $6x-15$
 
