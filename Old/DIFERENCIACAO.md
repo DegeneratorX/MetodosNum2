@@ -14,6 +14,14 @@
 
 Existem 3 tipos de filosofias para fazer o cálculo de derivadas. A **Forward**, a **Backward** e a **Central**.
 
+![](2023-03-28-16-42-11.png)
+
+A forward tenta aproximar a reta secante para a tangente pela direita.
+
+A backward tenta aproximar a reta secante para a tangente pela esquerda.
+
+A central tenta aproximar pelos dois lados a reta secante para a tangente no exato ponto médio.
+
 ## Foward
 
 Seja f(x) uma função sobre x.
@@ -24,11 +32,7 @@ $$\boxed{\Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\De
 
 ![](2023-03-15-10-34-57.png)
 
-Ora, se a tg do ângulo é o cateto oposto sobre o cateto adjacente, então temos
-
-$$\boxed{\Large \frac{f(x_0+\Delta x) - f(x_0)}{\Delta x}}$$
-
-Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pra frente (forward) e vira a inclinação da reta tangente (tange o gráfico). Isso porque com $\Delta x$ tendendo a zero, temos que de forma ultra microscópica, a curva do gráfico vira uma reta e coincide com a reta r no ponto tangente.
+É chamado de forward, pois pega um ponto da frente de distância $\Delta x$, e se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante se aproxima pra trás e vira a inclinação da reta tangente.
 
 > Nota: esse é o tipo mais utilizado no cálculo diferencial e integral.
 
@@ -42,7 +46,7 @@ $$\boxed{\Large f'(x_f) = \lim_{\Delta x \to 0} \frac{f(x_f)-f(x_f - \Delta x)}{
 
 ![](2023-03-15-11-55-08.png)
 
-Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pra trás (backward) e vira a inclinação da reta tangente (tange o gráfico).
+É chamado de backward, pois pega um ponto de trás de distância $\Delta x$ em relação ao ponto principal, e se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante se aproxima pra trás e vira a inclinação da reta tangente.
 
 ## Central
 
@@ -54,36 +58,17 @@ $$\boxed{\Large f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0 - \D
 
 ![](2023-03-15-12-02-23.png)
 
-Se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante (seca dois pontos da curva) se aproxima pro meio (central) e vira a inclinação da reta tangente (tange o gráfico).
+É chamado de central, pois pega dois pontos, na frente e trás de distância $\Delta x$ em relação ao ponto principal, e se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante se aproxima pelos dois lados (vai pra baixo) e vira a inclinação da reta tangente.
 
-### Exemplo
+## Derivada segunda de todas as filosofias
 
-$f(x) = \sin x$
+O algebrismo que prova as derivadas segunda estará no final desse arquivo. As fórmulas de derivada segunda são essas:
 
-$f'(x) = \cos x$
+### Forward
 
-$f'(\frac{\pi}{6}) = \cos (\frac{\pi}{6}) = \frac{\sqrt{3}}{2} = 0.86$
+$$\Large f''(x_0) = \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f(x_0 + 2\Delta x)- 2f(x_0 + \Delta x) + f(x_0)}{(\Delta x)^2}}$$
 
-$f'(\frac{\pi}{6}) \cong  \frac{\sin (\frac{\pi}{6}+0.1)- \sin(\frac{\pi}{6})}{\Delta x} = \frac{0.58 - 0.5}{0.1} = 0.8$
-
-
-### Exemplo 2: Derivada segunda
-
-
-- **Forward**
-
-$\Large f''(x_0) \cong \frac{f'(x_0 + \Delta x) - f'(x_0)}{\Delta x}$
-
-$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0 + \Delta x)}{\Delta x} - \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}}{\Delta x}$
-
-$\Large\cong \frac{f(x_0 + 2\Delta x)- 2f(x_0 + \Delta x) + f(x_0)}{(\Delta x)^2}$
-
-
-- **Backward**
-
-$\Large f''(x_0) = \frac{f'(x_0) - f'(x_0 - \Delta x)}{\Delta x}$
-
-$\Large= \frac{\frac{f(x_0) - f(x_0 - \Delta x)}{\Delta x} - \frac{f(x_0 - \Delta x) - f(x_0 - 2\Delta x)}{\Delta x}}{\Delta x}$
+### Backward
 
 $\Large= \frac{1}{(\Delta x)^2}[f(x_0)-2f(x_0-\Delta x)+f(x_0-2\Delta x)]$
 
@@ -151,3 +136,33 @@ $\boxed{\large f(x_0 + \Delta x) = f(x_0) + f'(x_0)\Delta x + \frac{1}{2!}f''(x_
 Essa série faz com que peguemos fatias cada vez menores da altura e somamos até chegar muito próximo de $f(x_0 + \Delta x)$. Assim:
 
 ![](2023-03-15-13-19-42.png)
+
+# Algebrismos Diversos
+
+## 1 - Derivação Segunda das filosofias
+
+- **Forward**
+
+$\Large f''(x_0) \cong \frac{f'(x_0 + \Delta x) - f'(x_0)}{\Delta x}$
+
+$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0 + \Delta x)}{\Delta x} - \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}}{\Delta x}$
+
+$\Large\cong \frac{f(x_0 + 2\Delta x)- 2f(x_0 + \Delta x) + f(x_0)}{(\Delta x)^2}$
+
+
+- **Backward**
+
+$\Large f''(x_0) = \frac{f'(x_0) - f'(x_0 - \Delta x)}{\Delta x}$
+
+$\Large= \frac{\frac{f(x_0) - f(x_0 - \Delta x)}{\Delta x} - \frac{f(x_0 - \Delta x) - f(x_0 - 2\Delta x)}{\Delta x}}{\Delta x}$
+
+$\Large= \frac{1}{(\Delta x)^2}[f(x_0)-2f(x_0-\Delta x)+f(x_0-2\Delta x)]$
+
+
+- **Central**
+
+$\Large f''(x_0) = \frac{f'(x_0 + \Delta x) - f'(x_0 - \Delta x)}{2\Delta x}$
+
+$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0)}{2\Delta x} - \frac{f(x_0) - f(x_0 - 2\Delta x)}{2\Delta x}}{2\Delta x}$
+
+$\Large= \frac{1}{4(\Delta x)^2}[f(x_0 + 2\Delta x) - 2f(x_0) + f(x_0 - 2\Delta x)]$
