@@ -66,36 +66,19 @@ O algebrismo que prova as derivadas segunda estará no final desse arquivo. As f
 
 ### Forward
 
-$$\Large f''(x_0) = \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f(x_0 + 2\Delta x)- 2f(x_0 + \Delta x) + f(x_0)}{(\Delta x)^2}}$$
+$$\Large f''(x_0) = \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0 + 2\Delta x)- 2f'(x_0 + \Delta x) + f'(x_0)}{(\Delta x)^2}}$$
 
 ### Backward
 
-$\Large= \frac{1}{(\Delta x)^2}[f(x_0)-2f(x_0-\Delta x)+f(x_0-2\Delta x)]$
+$$\Large f''(x_0) =  \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0)-2f'(x_0-\Delta x)+f'(x_0-2\Delta x)}{(\Delta x)^2}}$$
 
+### Central
 
-- **Central**
-
-$\Large f''(x_0) = \frac{f'(x_0 + \Delta x) - f'(x_0 - \Delta x)}{2\Delta x}$
-
-$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0)}{2\Delta x} - \frac{f(x_0) - f(x_0 - 2\Delta x)}{2\Delta x}}{2\Delta x}$
-
-$\Large= \frac{1}{4(\Delta x)^2}[f(x_0 + 2\Delta x) - 2f(x_0) + f(x_0 - 2\Delta x)]$
-
-### Exemplo 3: Derivada terceira
-
-- **Forward**
-
-$\Large f'''(x_0) = \frac{f''(x_0 + \Delta x)- f''(x_0)}{\Delta x}$
-
-$\Large= \frac{\frac{1}{(\Delta x)^2}[f(x_0 + 3\Delta x) - 2f(x_0+2\Delta x) + f(x_0 + \Delta x) - f(x_0 + 2x_0) + 2f(x_0 + \Delta x) - f(x_0)]}{\Delta x}$
-
-$\Large= \frac{1}{(\Delta x)^3}(f(x_0+3\Delta x)-3f(x_0 + 2\Delta x)+ 3f(x_0 + \Delta x) - f(x_0))$
-
-Backward e Central, fazer na mão depois...
+$\Large f''(x_0) =  \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0 + 2\Delta x) - 2f'(x_0) + f'(x_0 - 2\Delta x)}{4(\Delta x)^2}}$
 
 ## Derivada Parcial
 
-Se deriva parciaplmente funções.
+A derivada parcial serve para derivar funções em relação a uma ou mais variáveis.
 
 ### Exemplo:
 
@@ -145,24 +128,42 @@ Essa série faz com que peguemos fatias cada vez menores da altura e somamos at�
 
 $\Large f''(x_0) \cong \frac{f'(x_0 + \Delta x) - f'(x_0)}{\Delta x}$
 
-$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0 + \Delta x)}{\Delta x} - \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}}{\Delta x}$
+$\Large= \frac{\frac{f'(x_0 + 2\Delta x) - f'(x_0 + \Delta x)}{\Delta x} - \frac{f'(x_0 + \Delta x) - f'(x_0)}{\Delta x}}{\Delta x}$
 
-$\Large\cong \frac{f(x_0 + 2\Delta x)- 2f(x_0 + \Delta x) + f(x_0)}{(\Delta x)^2}$
+$\Large\cong \frac{f'(x_0 + 2\Delta x)- 2f'(x_0 + \Delta x) + f'(x_0)}{(\Delta x)^2}$
 
 
 - **Backward**
 
 $\Large f''(x_0) = \frac{f'(x_0) - f'(x_0 - \Delta x)}{\Delta x}$
 
-$\Large= \frac{\frac{f(x_0) - f(x_0 - \Delta x)}{\Delta x} - \frac{f(x_0 - \Delta x) - f(x_0 - 2\Delta x)}{\Delta x}}{\Delta x}$
+$\Large= \frac{\frac{f(x_0) - f'(x_0 - \Delta x)}{\Delta x} - \frac{f'(x_0 - \Delta x) - f'(x_0 - 2\Delta x)}{\Delta x}}{\Delta x}$
 
-$\Large= \frac{1}{(\Delta x)^2}[f(x_0)-2f(x_0-\Delta x)+f(x_0-2\Delta x)]$
+$\Large= \frac{1}{(\Delta x)^2}[f'(x_0)-2f(x_0-\Delta x)+f'(x_0-2\Delta x)]$
 
 
 - **Central**
 
 $\Large f''(x_0) = \frac{f'(x_0 + \Delta x) - f'(x_0 - \Delta x)}{2\Delta x}$
 
-$\Large= \frac{\frac{f(x_0 + 2\Delta x) - f(x_0)}{2\Delta x} - \frac{f(x_0) - f(x_0 - 2\Delta x)}{2\Delta x}}{2\Delta x}$
+$\Large= \frac{\frac{f'(x_0 + 2\Delta x) - f'(x_0)}{2\Delta x} - \frac{f(x_0) - f'(x_0 - 2\Delta x)}{2\Delta x}}{2\Delta x}$
 
-$\Large= \frac{1}{4(\Delta x)^2}[f(x_0 + 2\Delta x) - 2f(x_0) + f(x_0 - 2\Delta x)]$
+$\Large= \frac{1}{4(\Delta x)^2}[f'(x_0 + 2\Delta x) - 2f'(x_0) + f'(x_0 - 2\Delta x)]$
+
+## 2 - Derivação Terceira das filosofias
+
+- **Forward**
+
+$\Large f'''(x_0) = \frac{f''(x_0 + \Delta x)- f''(x_0)}{\Delta x}$
+
+$\Large= \frac{\frac{1}{(\Delta x)^2}[f''(x_0 + 3\Delta x) - 2f''(x_0+2\Delta x) + f''(x_0 + \Delta x) - f''(x_0 + 2x_0) + 2f''(x_0 + \Delta x) - f''(x_0)]}{\Delta x}$
+
+$\Large= \frac{1}{(\Delta x)^3}(f''(x_0+3\Delta x)-3f''(x_0 + 2\Delta x)+ 3f''(x_0 + \Delta x) - f''(x_0))$
+
+- **Backward**
+
+>TODO
+
+- **Central**
+
+>TODO
