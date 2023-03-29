@@ -74,7 +74,15 @@ $$\Large f''(x_0) =  \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0)-2f'(x_0-\Del
 
 ### Central
 
-$\Large f''(x_0) =  \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0 + 2\Delta x) - 2f'(x_0) + f'(x_0 - 2\Delta x)}{4(\Delta x)^2}}$
+$$\Large f''(x_0) =  \frac{d^2 f(x_0)}{dx^2} = \boxed{\frac{f'(x_0 + 2\Delta x) - 2f'(x_0) + f'(x_0 - 2\Delta x)}{4(\Delta x)^2}}$$
+
+> Nota: se eu chamar $2\Delta x$ de $\Delta\overline{x}$, então a segunda derivada ficaria $f''(x) = \boxed{\frac{f'(x_0 + 2\Delta x) - 2f'(x_0) + f'(x_0 - 2\Delta x)}{(\Delta\overline{x})^2}}$.
+
+## Derivada de ordem $n$ de todas as filosofias
+
+### Forward
+
+$$\boxed{f^{(k)}(x_i) \cong \frac{f^{(k-1)}(x_i-\Delta x) - f^{(k-1)}(x_i)}{\Delta x}}$$
 
 ## Derivada Parcial
 
@@ -105,6 +113,14 @@ $\frac{\partial^2 f}{\partial x\partial y} = 9x^2 + 16xy + 18y^2$
 $\frac{\partial^2 f}{\partial y\partial x} = 9x^2 + 16xy + 18y^2$
 
 Perceba que os dois últimos casos são equivalentes.
+
+## Série de Taylor
+
+Serve para aproximar em uma função usando uma série de polinômios.
+
+>TODO: olhar o chatgpt sobre a serie de taylor.
+
+
 
 ## Descobrindo o $f(x_0 + \Delta x)$ apenas com $x_0$
 
