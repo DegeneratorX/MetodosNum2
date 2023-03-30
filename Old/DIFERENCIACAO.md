@@ -118,7 +118,11 @@ Perceba que os dois últimos casos são equivalentes.
 
 Serve para aproximar em uma função usando uma série de polinômios.
 
->TODO: olhar o chatgpt sobre a serie de taylor.
+Ou seja, a série pode dizer sobre o comportamento de uma função ao redor de um ponto particular. A série é essencialmente uma aproximação de um polinômio de uma função. Então olhando para os termos da série, você pode ter uma ideia de como a função se comporta enquanto você se afasta do ponto central.
+
+Por exemplo, vamos supor que temos uma série f(x) centrada com a = 0:
+
+
 
 
 
