@@ -22,13 +22,13 @@ A backward tenta aproximar a reta secante para a tangente pela esquerda.
 
 A central tenta aproximar pelos dois lados a reta secante para a tangente no exato ponto médio.
 
-## Foward
+## Forward
 
 Seja f(x) uma função sobre x.
 
 A derivada de f(x) em **Forward** é:
 
-$$\boxed{\Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\Delta x)-f(x_0)}{\Delta x}}$$
+$$\boxed{\Large f'(x) = \frac{df(x_0)}{dx} \cong \lim_{\Delta x \to 0} \frac{f(x_0-\Delta x)-f(x_0)}{\Delta x}}$$
 
 ![](2023-03-15-10-34-57.png)
 
@@ -36,13 +36,15 @@ $$\boxed{\Large f'(x) = \frac{df(x_0)}{dx}=\lim_{\Delta x \to 0} \frac{f(x_0-\De
 
 > Nota: esse é o tipo mais utilizado no cálculo diferencial e integral.
 
+> Nota 2: a derivada é aproximada ($\cong$), ou seja, existe um erro numérico na operação. Será explicado mais tarde.
+
 ## Backward
 
 Seja f(x) uma função sobre x.
 
 A derivada de f(x) em **Backward** é:
 
-$$\boxed{\Large f'(x_f) = \lim_{\Delta x \to 0} \frac{f(x_f)-f(x_f - \Delta x)}{\Delta x}}$$
+$$\boxed{\Large f'(x_f) \cong \lim_{\Delta x \to 0} \frac{f(x_f)-f(x_f - \Delta x)}{\Delta x}}$$
 
 ![](2023-03-15-11-55-08.png)
 
@@ -54,11 +56,39 @@ Seja f(x) uma função sobre x.
 
 A derivada de f(x) em **Central** é:
 
-$$\boxed{\Large f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0 - \Delta x)}{2\Delta x}}$$
+$$\boxed{\Large f'(x_0) \cong \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0 - \Delta x)}{2\Delta x}}$$
 
 ![](2023-03-15-12-02-23.png)
 
 É chamado de central, pois pega dois pontos, na frente e trás de distância $\Delta x$ em relação ao ponto principal, e se diminuirmos $\Delta x$ tendendo a zero, então a reta $r$ secante se aproxima pelos dois lados (vai pra baixo) e vira a inclinação da reta tangente.
+
+### Exemplo: aplicação em fórmula trigonométrica
+
+Vamos calcular: $f(1)$, $f(1+0.001)$ e $f(1-0.001)$ para a seguinte função $f$:
+
+$\Large f(x) = \frac{\sinh x}{2 + \ln x}$
+
+Resolvendo, temos:
+
+$f(1) = \frac{\sinh 1}{2+\ln 1} = 0.5876$
+
+$f(1+0.001) = \frac{\sinh 1.001}{2+\ln 1.001} = 0.58808$
+
+$f(1-0.001) = \frac{\sinh 0.999}{2+\ln 0.999} = 0.58712$
+
+Portanto, temos resultados bem próximos. Qual o mais preciso?
+
+O que sabemos é que pegamos um ponto a frente e atrás, de distância $\Delta x$.
+
+Usando as fórmulas de derivada para cada filosofia e substituindo nos pontos, temos:
+
+Forward: $f'(1) \cong \frac{f(1+0.001) - f(1)}{\Delta x} = \frac{0.58808 - 0.5876}{0.001} = 0.47794$
+
+Backward: $f'(1) \cong \frac{f(1) - f(1-0.001)}{\Delta x} = \frac{0.5876-0.58712}{0.001} = 0.47754$
+
+Central: $f'(1) \cong \frac{f(1+0.001) - f(1-0.001)}{2\cdot \Delta x} = \frac{0.58808 - 0.58712}{2\cdot 0.001} = 0.47774$
+
+Se fizermos o cálculo analítico de f'(1), resulta em 0.47774, muito próximo da filosofia Central. O que nos indica que a Central é muito mais precisa, justamente por trabalhar com dois pontos vizinhos.
 
 ## Derivada segunda de todas as filosofias
 
@@ -116,7 +146,7 @@ Perceba que os dois últimos casos são equivalentes.
 
 ## Série de Taylor
 
-Serve para aproximar em uma função usando uma série de polinômios.
+É uma expansão da função em torno de um ponto usando uma série de polinômio com infinitos termos.
 
 Ou seja, a série pode dizer sobre o comportamento de uma função ao redor de um ponto particular. A série é essencialmente uma aproximação de um polinômio de uma função. Então olhando para os termos da série, você pode ter uma ideia de como a função se comporta enquanto você se afasta do ponto central.
 
@@ -155,6 +185,106 @@ $f(x + \Delta x) = \sin(x + \Delta x) = 0.1 - 0.16667\cdot 0.001 + 0.00833\cdot 
 Se colocar na calculadora, verá que o seno de 0.1 é muito próximo de 0.0998. E quanto mais termos na série, mais preciso o resultado fica.
 
 Já deu pra ver onde isso vai parar, né? Em um método numérico.
+
+### Exemplo 2: Exponencial
+
+Suponha $f(x) = e^{-x}$. Suas derivadas analíticas são:
+
+$f'(x) = -e^{-x}$
+
+$f''(x) = +e^{-x}$
+
+$f'''(x) = -e^{-x}$
+
+Quando eu avalio essas derivadas em um ponto $x_0$, fica assim:
+
+$f'(x_0) = -e^{-x_0}$
+
+$f''(x_0) = +e^{-x_0}$
+
+$f'''(x_0) = -e^{-x_0}$
+
+Eu posso pegar as derivadas e substituir na série de Taylor.
+
+$$f(x) = f(x_0) + (-e^{-x_0})(x-x_0) + \frac{e^{-x_0}}{2!}(x-x_0)^2 + \frac{e^{-x_0}}{3!}(x-x_0)^3+...$$
+
+E se eu substituir, por exemplo, $x_0$ por 1, fica:
+
+$$f(x) = e^{-1} - (-e^{-1})(x-1) + \frac{e^{-1}}{2!}(x-1)^2 - \frac{e^{-1}}{3!}(x-1)^3+...$$
+
+Ou seja, isso é um polonômio, e quanto mais eu expando os termos, extremamente menor vai ficando eles, pois é dividido por fatorial, que é um operador mais crescente que exponencial quanto ao seu comportamento assintótico, o que exigiria um custo computacional maior de análise de precisão.
+
+Com $e^{-1} = 0.3678$, temos:
+
+$$f(x) = 0.3678 - 0.3678(x-1) + \frac{0.3678}{2!}(x-1)^2-\frac{0.3678}{3!}(x-1)^3+...$$
+
+Perceba de fato o comportamento polinomial dessa função. Ou seja, pra um dado $x$, eu obtenho $y$ pra qualquer ponto, desde que seja próximo do ponto $x_0 = 1$. E quanto mais termos, mais preciso o $y$ será em relação a $x$. E assim analiso o comportamento da função ponto a ponto do gráfico ao redor de $x_0$, de tal forma que consigo desenhar o gráfico da função em questão iterativamente. Se ficar longe demais de $x_0$ ou usar poucos termos, a imprecisão para $y$ aumentará.
+
+![](2023-04-03-15-36-23.png)
+
+## Descobrir Derivadas usando Taylor
+
+Pegando o exemplo da função exponencial $e^{-x}$ e expandindo no ponto $x = 1$. Perceba que a série de Taylor é uma função que possui termos com derivadas. Se eu quiser obter a derivada ao invés da função polinomial, eu isolo o termo de derivada. Assim:
+
+$$f(x) = e^{-1} - (-e^{-1})(x-1) + \frac{e^{-1}}{2!}(x-1)^2 - \frac{e^{-1}}{3!}(x-1)^3+...$$
+
+$$-e^{-1}(x-1) = f(x) - e^{-1} - \frac{e^{-1}}{2!}(x-1)^2 + \frac{e^{-1}}{3!}(x-1)^3+...$$
+
+Perceba que eu multipliquei tudo por -1 para trabalhar melhor. Agora isolo apenas o termo da derivada no lado esquerdo ($f'(x) = -e^{-1}$), passando (x-1) dividindo:
+
+$$-e^{-1} = \frac{1}{(x-1)} \left(f(x) + e^{-1} - \frac{e^{-1}}{2!}(x-1)^2 + \frac{e^{-1}}{3!}(x-1)^3+...\right)$$
+
+Aqui não faz muito sentido fazer isso se eu conheço as derivadas analíticas. Mas pra exemplificar, estou trabalhando com esse exemplo simples.
+
+Agora vou voltar com as notações de funções genéricas:
+
+$$f'(x_0) = \frac{1}{(x-1)} \left(f(x) + f'(x_0) - \frac{f''(x_0)}{2!}(x-1)^2 + \frac{f'''(x_0) }{3!}(x-1)^3+...\right)$$
+
+## Filosofias e Série de Taylor
+
+https://youtu.be/RU8yFhAuRPk
+
+A resposta do porque a filosofia central é mais precisa estará aqui.
+
+Resgatando a série de Taylor expandindo $f(x)$, temos:
+
+$$\boxed{\Large f(x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+...}$$
+
+### Forward
+
+Considere a perturbação positiva como sendo $x = x_0 + \Delta x \implies x-x_0 = \Delta x$.
+
+$$f(x_0+\Delta x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+...$$
+
+Como $x - x_0 = \Delta x$, temos:
+
+**Eq 1**
+$$f(x_0+\Delta x) = f(x_0) + f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2+\frac{f'''(x_0)}{3!}\Delta x^3+...$$
+
+Se isolarmos a derivada $f'(x_0)$ como já fizemos em operações passadas para achar derivada, temos:
+
+
+
+### Backward
+
+Considere a perturbação negativa como sendo $x = x_0 - \Delta x \implies x-x_0 = -\Delta x$.
+
+$$f(x_0-\Delta x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+... $$ 
+
+Como $x - x_0 = -\Delta x$, temos:
+
+**Eq 2**
+$$f(x_0-\Delta x) = f(x_0) - f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2-\frac{f'''(x_0)}{3!}\Delta x^3+...$$
+
+Perceba que $-\Delta x$ faz alguns termos ficarem negativos quando o grau do expoente é ímpar. Qualquer termo elevado a um número par sempre será positivo.
+
+### Central
+
+Para $\Delta x$ muito menor que 1 (próximo do ponto de $x$), na medida que o $\Delta x$ vai sendo elevado a números maiores, os termos vão ficando menores, principalmente por conta da divisão por fatorial. Assim:
+
+$$\left|f'(x_0)\Delta x\right| >> \left|\frac{f''(x_0)}{2!}\Delta x^2\right| >> \left|\frac{f'''_0}{3!}\Delta x^3\right| >> ...$$
+
+Ou seja, os termos de maior ordem são os que mais dominam.
 
 
 
