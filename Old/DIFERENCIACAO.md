@@ -120,9 +120,41 @@ Serve para aproximar em uma função usando uma série de polinômios.
 
 Ou seja, a série pode dizer sobre o comportamento de uma função ao redor de um ponto particular. A série é essencialmente uma aproximação de um polinômio de uma função. Então olhando para os termos da série, você pode ter uma ideia de como a função se comporta enquanto você se afasta do ponto central.
 
-Por exemplo, vamos supor que temos uma série f(x) centrada com a = 0:
+![](2023-04-02-15-32-49.png)
 
+Suponha uma função $f$ como na imagem acima. Suponha um $\bar{x}$ e uma distância vizinha $\bar{x} + \Delta x$. Ora, sabemos que  se o ponto $\bar{x}$ for próximo de $\bar{x} + \Delta x$, podemos fazer um chute inicial:
 
+$$f(\bar{x} + \Delta x) = f(\bar{x})$$
+
+Esse chute faria muito sentido se $Delta x$ fosse muito pequeno. Mas supondo que não, e que precisamos de mais um pouco de precisão. Podemos obter um termo a mais e que nos dará uma maior precisão do quão "alto" é $f(\bar{x} + \Delta x)$
+
+Pra isso, traço uma tangente ao ponto $(\bar{x}, f(\bar{x}))$. Obtemos um ângulo $\alpha$, que é justamente o coeficiente angular, a tangente, ou seja, a derivada naquele ponto. Com esse ângulo, calculamos o cateto oposto sobre o adjacente. Assim:
+
+$$\tan \alpha = f'(\bar{x}) = \frac{segundo termo}{\Delta x} \implies segundotermo = f'(\bar{x})\cdot \Delta x$$
+
+Então somamos o segundo termo ao primeiro termo, e temos uma precisão maior desse $f(\bar{x} + \Delta x)$. Ficará assim:
+
+$$f(\bar{x} + \Delta x) = f(\bar{x}) + f'(\bar{x})\cdot \Delta x$$
+
+Já temos o segundo termo do que chamamos de série de Taylor. A série para provar o terceiro termo em diante exige mais cálculos, portanto basta saber que quanto mais termos a série tem, mais preciso o cálculo de $f(\bar{x} + \Delta x)$. Os outros termos são esses:
+
+**Série de Taylor**
+
+$$\boxed{\Large f(\bar{x} + \Delta x) = f(\bar{x}) + \left(\frac{1}{1!}\right)f'(\bar{x})\cdot \Delta x + \frac{1}{2!}f''(\bar{x})(\Delta x)^2 + \frac{1}{3!}f''1(\bar{x})(\Delta x)^3 + ... + \frac{1}{n!}f^{(n)}(\bar{x})(\Delta x)^n}$$
+
+### Exemplo: Seno
+
+Sabendo que o seno de 0 é 0, deseja-se saber o seno de 0.1 rad. É possível usar regra de três para descobrir, mas o número $\pi$ no final das contas é uma aproximação que também pode ser descoberta por meio de séries.
+
+Sem o uso de regra de três, é possível encontrar o seno de diversos ângulos próximos dos já conhecidos com bastante precisão utilizando a série de Taylor. Nesse caso irei usar 5 termos:
+
+$f(x + \Delta x) = \sin(x + \Delta x) = \cancel{\sin 0} + \cos 0\cdot 0.1 - \cancel{\frac{1}{2}\sin 0\cdot 0.1^2} - \frac{1}{3!}\cos 0\cdot 0.1^3 + \cancel{\frac{1}{4!}\sin 0\cdot 0.1^4} + \frac{1}{5!}\cos 0\cdot 0.1^5$
+
+$f(x + \Delta x) = \sin(x + \Delta x) = 0.1 - 0.16667\cdot 0.001 + 0.00833\cdot 0.00001 = \boxed{0.0998}$
+
+Se colocar na calculadora, verá que o seno de 0.1 é muito próximo de 0.0998. E quanto mais termos na série, mais preciso o resultado fica.
+
+Já deu pra ver onde isso vai parar, né? Em um método numérico.
 
 
 
