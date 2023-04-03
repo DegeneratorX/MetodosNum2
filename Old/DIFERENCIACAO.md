@@ -250,20 +250,41 @@ Resgatando a série de Taylor expandindo $f(x)$, temos:
 
 $$\boxed{\Large f(x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+...}$$
 
+Para $\Delta x = x - x_0$ muito menor que 1 (próximo do ponto de $x$), na medida que o $\Delta x$ vai sendo elevado a números maiores, os termos vão ficando menores, principalmente por conta da divisão por fatorial. Assim:
+
+$$\left|f'(x_0)\Delta x\right| >> \left|\frac{f''(x_0)}{2!}\Delta x^2\right| >> \left|\frac{f'''_0}{3!}\Delta x^3\right| >> ...$$
+
+Ou seja, os termos de maior ordem são os que mais dominam.
+
 ### Forward
 
 Considere a perturbação positiva como sendo $x = x_0 + \Delta x \implies x-x_0 = \Delta x$.
+
 
 $$f(x_0+\Delta x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+...$$
 
 Como $x - x_0 = \Delta x$, temos:
 
-**Eq 1**
+**Equação 1 (irei utilizar mais tarde para a Central)**
 $$f(x_0+\Delta x) = f(x_0) + f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2+\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
 Se isolarmos a derivada $f'(x_0)$ como já fizemos em operações passadas para achar derivada, temos:
 
+$$f(x_0+\Delta x) = f(x_0) + f'(x_0)\Delta x +\frac{f''(x_0)}{2!}\Delta x^2+\frac{f''(x_0)}{3!}\Delta x^3+...$$
 
+$$f'(x_0) = \frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}+\frac{1}{\Delta x}\left(-\frac{f''(x_0)}{2!}\Delta x^2 - \frac{f'''(x_0)}{3!}\Delta x^3 - ...\right)$$
+
+Ora, podemos cortar $\Delta x$ com diversos graus de $\Delta x$. Assim:
+
+$$f'(x_0) = \frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}+\frac{1}{\cancel{\Delta x}}\left(-\frac{f''(x_0)}{2!}\cancel{\Delta x^2} - \frac{f'''(x_0)}{3!}\cancel{\Delta x^3} - ...\right)$$
+
+Resultando em:
+
+$$\boxed{\Large f'(x_0) = \frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}+\left(-\frac{f''(x_0)}{2!}\Delta x - \frac{f'''(x_0)}{3!}\Delta x^2 - ...\right)}$$
+
+Do lado esquerdo, temos a derivada progressiva (forward). E o restante, o erro da derivada progressiva.
+
+Perceba que quem domina o erro é o termo da derivada segunda, pois é o de menor ordem. Ou seja, **o erro é da ordem de $\Delta x$**, pois é o valor que aparece multiplicando o termo que domina o erro.
 
 ### Backward
 
@@ -273,34 +294,48 @@ $$f(x_0-\Delta x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f
 
 Como $x - x_0 = -\Delta x$, temos:
 
-**Eq 2**
+**Equação 2 (irei utilizar mais tarde para a Central)**
 $$f(x_0-\Delta x) = f(x_0) - f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2-\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
 Perceba que $-\Delta x$ faz alguns termos ficarem negativos quando o grau do expoente é ímpar. Qualquer termo elevado a um número par sempre será positivo.
 
+Isolando o f'(x_0) e pulando diversas etapas de algebrismo já explicadas na filosofia Forward, temos que:
+
+$$\boxed{\Large f'(x_0) = \frac{f(x_0)-f(x_0-\Delta x)}{\Delta x}+\left(-\frac{f''(x_0)}{2!}\Delta x - \frac{f'''(x_0)}{3!}\Delta x^2 - ...\right)}$$
+
+Do lado esquerdo, temos a derivada regressiva (backward). E o restante, o erro da derivada regressiva.
+
+A análise do erro é a mesma da filosofia forward, ou seja, da ordem de $Delta x$.
+
 ### Central
 
-Para $\Delta x$ muito menor que 1 (próximo do ponto de $x$), na medida que o $\Delta x$ vai sendo elevado a números maiores, os termos vão ficando menores, principalmente por conta da divisão por fatorial. Assim:
+Tomando as equações 1 e 2 das filosofias anteriores, temos:
 
-$$\left|f'(x_0)\Delta x\right| >> \left|\frac{f''(x_0)}{2!}\Delta x^2\right| >> \left|\frac{f'''_0}{3!}\Delta x^3\right| >> ...$$
+$$f(x_0+\Delta x) = f(x_0) + f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2+\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
-Ou seja, os termos de maior ordem são os que mais dominam.
+$$f(x_0-\Delta x) = f(x_0) - f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2-\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
+Multiplicando a segunda equação por $(-1)$ e somando as duas equações, temos:
 
+$$f(x_0+\Delta x) = \cancel{f(x_0)} + f'(x_0)\Delta x+\cancel{\frac{f''(x_0)}{2!}\Delta x^2}+\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
-## Descobrindo o $f(x_0 + \Delta x)$ apenas com $x_0$
+$$-f(x_0-\Delta x) = \cancel{-f(x_0)} + f'(x_0)\Delta x-\cancel{\frac{f''(x_0)}{2!}\Delta x^2}+\frac{f'''(x_0)}{3!}\Delta x^3-...$$
 
-É possível descobrir a altura total do último ponto da reta secante através de uma série de taylor.
+Resultando em:
 
-![](2023-03-15-13-06-02.png)
+$$f(x_0+\Delta x)-f(x_0-\Delta x) = 2f'(x_0)\Delta x + 2\frac{f'''(x_0)}{3!}\Delta x^3+...$$
 
-A série consiste no seguinte
+Isolando $f'(x_0)$:
 
-$\boxed{\large f(x_0 + \Delta x) = f(x_0) + f'(x_0)\Delta x + \frac{1}{2!}f''(x_0)\cdot(\Delta x)^2 + \frac{1}{3!}f'''(x_0)\cdot(\Delta x)^3 + \frac{1}{4!}f'''(x_0)\cdot(\Delta x)^4+...+\frac{1}{n!}f(x_0)\cdot(\Delta x)^n}$
+$$f(x_0) = \frac{f(x_0+\Delta x)-f(x_0-\Delta x)}{2\Delta x}+\frac{1}{2\cancel{\Delta x}}\left(-\frac{f'''(x_0)}{3!}\cancel{\Delta x^3}-\frac{f^{(v)}(x_0)}{5!}\cancel{\Delta x^5}-...\right)$$
 
-Essa série faz com que peguemos fatias cada vez menores da altura e somamos até chegar muito próximo de $f(x_0 + \Delta x)$. Assim:
+Temos a equação final:
 
-![](2023-03-15-13-19-42.png)
+$$\boxed{\Large f(x_0) = \frac{f(x_0+\Delta x)-f(x_0-\Delta x)}{2\Delta x}+\frac{1}{2}\left(-\frac{f'''(x_0)}{3!}\Delta x^2-\frac{f^{(v)}(x_0)}{5!}\Delta x^4-...\right)}$$
+
+Do lado esquerdo, temos a derivada Central. E o restante, o erro da derivada Central.
+
+Perceba que a ordem do erro dessa vez é $\Delta x^2$. Ou seja, o **erro da derivada Central se torna menor que o erro da derivada regressiva e progressiva**, pois quanto maior é $\Delta x$, menor fica o termo. Isso responde o motivo da Central ser precisa, e sempre é bom usar ela quando possível.
 
 # Algebrismos Diversos
 
