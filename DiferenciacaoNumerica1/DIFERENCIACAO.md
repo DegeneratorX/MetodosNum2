@@ -10,7 +10,7 @@
 - Prova 2: Unidade 3
 - Prova 3: Unidades 4 e 5
 
-# Diferenciação
+# Diferenciação 1
 
 Existem 3 tipos de filosofias para fazer o cálculo de derivadas. A **Forward**, a **Backward** e a **Central**.
 
@@ -222,7 +222,7 @@ Perceba de fato o comportamento polinomial dessa função. Ou seja, pra um dado 
 
 ![](2023-04-03-15-36-23.png)
 
-## Descobrir Derivadas usando Taylor
+# Derivada Primeira Numérica
 
 Pegando o exemplo da função exponencial $e^{-x}$ e expandindo no ponto $x = 1$. Perceba que a série de Taylor é uma função que possui termos com derivadas. Se eu quiser obter a derivada ao invés da função polinomial, eu isolo o termo de derivada. Assim:
 
@@ -230,7 +230,9 @@ $$f(x) = e^{-1} - (-e^{-1})(x-1) + \frac{e^{-1}}{2!}(x-1)^2 - \frac{e^{-1}}{3!}(
 
 $$-e^{-1}(x-1) = f(x) - e^{-1} - \frac{e^{-1}}{2!}(x-1)^2 + \frac{e^{-1}}{3!}(x-1)^3+...$$
 
-Perceba que eu multipliquei tudo por -1 para trabalhar melhor. Agora isolo apenas o termo da derivada no lado esquerdo ($f'(x) = -e^{-1}$), passando (x-1) dividindo:
+Aqui eu isolei o termo de derivada primeira.
+
+Perceba que eu multipliquei tudo por -1 para trabalhar melhor. Agora isolo apenas o termo da derivada primeira no lado esquerdo ($f'(x) = -e^{-1}$), passando (x-1) dividindo:
 
 $$-e^{-1} = \frac{1}{(x-1)} \left(f(x) + e^{-1} - \frac{e^{-1}}{2!}(x-1)^2 + \frac{e^{-1}}{3!}(x-1)^3+...\right)$$
 
@@ -238,19 +240,15 @@ Aqui não faz muito sentido fazer isso se eu conheço as derivadas analíticas. 
 
 Agora vou voltar com as notações de funções genéricas:
 
-$$f'(x_0) = \frac{1}{(x-1)} \left(f(x) + f'(x_0) - \frac{f''(x_0)}{2!}(x-1)^2 + \frac{f'''(x_0) }{3!}(x-1)^3+...\right)$$
+$$f'(x_0) = \frac{1}{(x-1)} \left(f(x) + f(x_0) - \frac{f''(x_0)}{2!}(x-1)^2 + \frac{f'''(x_0) }{3!}(x-1)^3+...\right)$$
 
-## Filosofias e Série de Taylor
+Basicamente essa é a maneira que fazemos para achar derivações numéricas. **Isolamos a derivada desejada**.
 
-https://youtu.be/RU8yFhAuRPk
-
-A resposta do porque a filosofia central é mais precisa estará aqui.
+## Forward
 
 Resgatando a série de Taylor expandindo $f(x)$, temos:
 
 $$\boxed{\Large f(x) = f(x_0) + f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+...}$$
-
-### Forward
 
 Considere a perturbação positiva como sendo $x = x_0 + \Delta x \implies x-x_0 = \Delta x$.
 
@@ -263,9 +261,7 @@ $$f(x_0+\Delta x) = f(x_0) + f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2+\frac
 
 Se isolarmos a derivada $f'(x_0)$ como já fizemos em operações passadas para achar derivada, temos:
 
-
-
-### Backward
+## Backward
 
 Considere a perturbação negativa como sendo $x = x_0 - \Delta x \implies x-x_0 = -\Delta x$.
 
@@ -278,29 +274,13 @@ $$f(x_0-\Delta x) = f(x_0) - f'(x_0)\Delta x+\frac{f''(x_0)}{2!}\Delta x^2-\frac
 
 Perceba que $-\Delta x$ faz alguns termos ficarem negativos quando o grau do expoente é ímpar. Qualquer termo elevado a um número par sempre será positivo.
 
-### Central
+## Central
 
 Para $\Delta x$ muito menor que 1 (próximo do ponto de $x$), na medida que o $\Delta x$ vai sendo elevado a números maiores, os termos vão ficando menores, principalmente por conta da divisão por fatorial. Assim:
 
 $$\left|f'(x_0)\Delta x\right| >> \left|\frac{f''(x_0)}{2!}\Delta x^2\right| >> \left|\frac{f'''_0}{3!}\Delta x^3\right| >> ...$$
 
 Ou seja, os termos de maior ordem são os que mais dominam.
-
-
-
-## Descobrindo o $f(x_0 + \Delta x)$ apenas com $x_0$
-
-É possível descobrir a altura total do último ponto da reta secante através de uma série de taylor.
-
-![](2023-03-15-13-06-02.png)
-
-A série consiste no seguinte
-
-$\boxed{\large f(x_0 + \Delta x) = f(x_0) + f'(x_0)\Delta x + \frac{1}{2!}f''(x_0)\cdot(\Delta x)^2 + \frac{1}{3!}f'''(x_0)\cdot(\Delta x)^3 + \frac{1}{4!}f'''(x_0)\cdot(\Delta x)^4+...+\frac{1}{n!}f(x_0)\cdot(\Delta x)^n}$
-
-Essa série faz com que peguemos fatias cada vez menores da altura e somamos até chegar muito próximo de $f(x_0 + \Delta x)$. Assim:
-
-![](2023-03-15-13-19-42.png)
 
 # Algebrismos Diversos
 
