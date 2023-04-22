@@ -17,6 +17,3 @@ $$\boxed{\Large\int_{a}^{b}f(x)dx = F(b) - F(a) \iff F'(x) = f(x)}$$
 Esse é o Teorema Fundamental do Cálculo.
 
 O problema é que nem sempre, analiticamente, esse cálculo pode ser feito com $F(x)$, ou é de difícil obtenção. Se esse for o caso e conhecemos somente valores discretos de $f(x)$, então precisamos utilizar métodos numéricos para avaliar a integral de $f(x)$.
-
-# Método de Newton-Cotes
-
