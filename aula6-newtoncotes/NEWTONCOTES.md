@@ -358,14 +358,6 @@ Essa estimativa do erro pode ser utilizada para determinar o número de subinter
 
 Essas tabelas podem ser muito úteis para resumir tudo que foi falado até agora.
 
-
-$$A = \{n | n \ge 2, (\exists a,b,c \ge 1)a^n+b^n = c^n\}$$
-
-$$P_a(x) = \left\{ \begin{array}{cl}
-1 & se \ x \in 0 \\
-0 & se \ x \notin 0
-\end{array} \right.$$
-
 ### Newton-Cotes Fechado
 
 | Grau | h | Nome | Fórmula | Erro |
