@@ -360,16 +360,33 @@ Essas tabelas podem ser muito úteis para resumir tudo que foi falado até agora
 
 ### Newton-Cotes Fechado
 
+Para $0 \le i \le grau$, seja:
+
+$x_i = (i)\cdot h$
+
+, e $h = \frac{b-a}{grau}$, exceto se $grau = 0 \implies h = \frac{(b-a)}{1}$.
+
 | Grau | h | Nome | Fórmula | Erro |
 | --- | --- | --- | --- | --- |
-| 0 | $(b-a)$ | Ponto Médio | $2hf(x_0)$ | - |
-| 1 | $\frac{(b-a)}{2}$ | Regra do Trapézio | $\frac{1}{2}h(f(x_0)+f(x_1))$ | $-\frac{1}{12}h^3f^{(2)}(\xi)$ |
-| 2 | $(b-a)$ | Regra 1/3 de Simpson | $\frac{1}{3}h[f(x_1) + 4f(x_2) + f(x_3)]$ | $-\frac{1}{90}h^5f^{(4)}(\xi)$ |
-| 3 | $(b-a)$ | Regra 3/8 de Simpson | $2hf(x_0)$ | $-\frac{1}{90}h^5f^{(4)}(\xi)$ |
-| 4 | $(b-a)$ | Regra de Boole | $2hf(x_0)$ | $-\frac{1}{90}h^5f^{(4)}(\xi)$ |
+| 0 | $\frac{(b-a)}{1}$ | Soma de Riemann | $2hf(x_0)$ | - |
+| 1 | $\frac{(b-a)}{1}$ | Regra do Trapézio | $\frac{1}{2}h(f(x_0)+f(x_1))$ | $-\frac{1}{12}h^3f^{(2)}(\xi)$ |
+| 2 | $\frac{(b-a)}{2}$ | Regra 1/3 de Simpson | $\frac{1}{3}h[f(x_1) + 4f(x_2) + f(x_3)]$ | $-\frac{1}{90}h^5f^{(4)}(\xi)$ |
+| 3 | $\frac{(b-a)}{3}$ | Regra 3/8 de Simpson | $\frac{3}{8}h[f(x_0) + 3f(x_1) + 3f(x_2) +f(x_3)]$ | $-\frac{3}{80}h^5f^{(4)}(\xi)$ |
+| 4 | $\frac{(b-a)}{4}$ | Regra de Boole | $\frac{2}{45}h[7f(x_0) + 32f(x_1) + 12f(x_2) +32f(x_3)+7f(x_4)]$ | $-\frac{8}{945}h^7f^{(6)}(\xi)$ |
 
 
 ### Newton-Cotes Aberto
 
+Para $0 \le i \le grau$, seja:
+
+$x_i = (i+1)\cdot h$
+
+, e $h = \frac{b-a}{grau+2}$.
+
 | Grau | h | Nome | Fórmula | Erro |
 | --- | --- | --- | --- | --- |
+| 0 | $\frac{(b-a)}{2}$ | Soma de Riemann Aberta | $2hf(x_0)$ | $\frac{1}{3}h^3f^{(2)}(\xi)$ |
+| 1 | $\frac{(b-a)}{3}$ | Regra do Trapézio Aberta | $\frac{3}{2}h(f(x_0) + f(x_1))$ | $\frac{3}{4}h^3f^{(2)}(\xi)$ |
+| 2 | $\frac{(b-a)}{4}$ | Regra de Milne | $\frac{4}{3}h(2f(x_0) - f(x_1)+2f(x_2))$ | $\frac{14}{45}h^5f^{(4)}(\xi)$ |
+| 3 | $\frac{(b-a)}{5}$ | Sem Nome | $\frac{5}{24}h(11f(x_0) + f(x_1) + f(x_2) + 11f(x_3))$ | $\frac{95}{144}h^5f^{(4)}(\xi)$ |
+| 4 | $\frac{(b-a)}{6}$ | Sem Nome | $\frac{6}{20}h(11f(x_0) - 14f(x_1) + 26f(x_2) - 14f(x_3)+11f(x_4))$ | $\frac{1}{2880}h^7f^{(5)}(\xi)$ |
