@@ -250,7 +250,7 @@ O nome $3/8$ é porque $h$ multiplica por $\frac{3}{8}$ na fórmula principal.
 
 E justamente por causa disso, temos 4 pontos interpolados em $f$ pelo polinômio interpolador que formam uma curv cúbica. Ou seja, ao invés de trabalhar com parábola, trabalharemos com curvas cúbicas, e a cada curva cúbica interpolando uma partição de $f$, teremos 3 "h"s.
 
-Em python, basta alterar a fórmula da soma, e dessa vez particionar em 3 vezes.
+Em python, basta alterar a fórmula da soma.
 
 ```python
 # primeira iteração
@@ -260,12 +260,9 @@ soma = (3*(h)/8)*(f(a) + 3*F(a+h) + 3*F(a+2*h) +F(a+3*h))
 # k-ésima iteração (laço while)
 h = (x_final-x_inicial)/3
 soma = soma + (3*(h)/8)*(f(x_inicial) + 3*F(x_inicial+h) + 3*F(x_inicial+2*h) +F(x_inicial+3*h))
-
-# Partições
-particoes *= 3
 ```
 
-![](2023-04-22-17-18-41.png)
+![](2023-04-25-17-11-40.png)
 
 Esse método tem uma particularidade, que é a precisão maior para casos com muitos pontos de inflexão, e quando há muita oscilação em $f$ em um intervalo $[a,b]$, porém não é adequado o uso para quantidade de pontos pares que separam os intervalos de integração. Ou seja, o método trabalha com quantidade ímpares de pontos, ao invés de pares (trapézio e 1/3 Simpson utilizam quantidades pares).
 
@@ -287,9 +284,6 @@ soma = (2*(h)/45)*(7*f(a) + 32*f(a+h) + 12*f(a+2*h) +32*f(a+3*h)+7*f(a+4*h))
 # k-ésima iteração (laço while)
 h = (x_final-x_inicial)/4
 soma = soma + (2*(h)/45)*(7*f(x_inicial) + 32*f(x_inicial+h) + 12*f(x_inicial+2*h) +32*f(x_inicial+3*h)+7*f(x_inicial+4*h))
-
-# Partições
-particoes *= 4
 ```
 
 # Filosofia Aberta
