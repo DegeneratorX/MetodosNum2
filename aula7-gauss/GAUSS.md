@@ -16,7 +16,9 @@ A quadratura de Gauss utilizando 1 ponto é a seguinte:
 
 $$\Large I = \int_{a}^{b}f(x)dx \simeq \boxed{A_1f(x_1) = (b-a)f((b-a)/2)}$$
 
-, onde $A_1$ é uma constante qualquer que multiplica $f(x_1)$. $x_1$ é o único ponto que estamos trabalhando.
+, onde $A_1$ é uma constante qualquer definida por: $$
+
+$A_1$ multiplica $f(x_1)$. É também chamada de **peso**. $x_1$ é o único ponto que estamos trabalhando.
 
 A demonstração dessa fórmula é a seguinte:
 
@@ -244,10 +246,17 @@ Grau 2: $P_2(x) = \frac{1}{2}(3x^2-1) = 0 \implies x = \pm \sqrt{\frac{1}{3}}$
 
 Grau 3: $P_3(x) = \frac{1}{2}(5x^3-3x) = 0 \implies x_1 = -\sqrt{\frac{3}{5}}, x_2 = 0, x_3 = +\sqrt{\frac{3}{5}}$
 
-# Quadratura de Gauss-Legendre
+E por aí vai.
 
+# Quadratura de Gauss-Legendre - Definitivo
 
-### OUTDATED & TODO: Irei varrer isso aqui. Esse tipo de abordagem é ruim e tem formas melhores de simplificar isso aqui.
+Até agora trabalhamos com algumas fórmulas e que disse que iria usar para agora. Irei trazer elas para cá.
+
+$\boxed{\int_{-1}^{1}f(x(t))\frac{b-a}{2}dt}$, $\boxed{x(t) = \frac{b-a}{2}t + \frac{b+a}{2}}$
+
+Agora irei mudar alguns nomes de variáveis de tal forma que seja compatível com a abordagem do professor Creto:
+
+$\boxed{\int_{-1}^{1}f(x(a))\frac{x_f-x_i}{2}da}$, $\boxed{x(t) = \frac{x_f-x_i}{2}a_k + \frac{x_f+x_i}{2}}$
 
 A fórmula é a seguinte:
 
