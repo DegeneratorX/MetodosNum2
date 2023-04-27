@@ -311,3 +311,13 @@ Segue a tabela completa de raízes e pesos, de grau 0 até 4 do método de Gauss
 | $2$ | $\pm\sqrt{\frac{1}{3}}$ | $w_1 = w_2 = 1$  |
 | $3$ | $\pm\sqrt{\frac{3}{5}}$, $0$ | $w_1 = \frac{5}{9}$, $w_2 = \frac{8}{9}$, $w_3 = \frac{5}{9}$ |
 | $4$ | $\pm\sqrt{\left(\frac{(3+2\sqrt{\frac{6}{5}})}{7}\right)}, \pm\sqrt{\left(\frac{(3-2\sqrt{\frac{6}{5}})}{7}\right)}$ | $w_1 = w_4 = \frac{1}{2}-\frac{\sqrt{\frac{5}{6}}}{6}$, $w_2 = w_3 = \frac{1}{36}\cdot( 18+\sqrt{30})$ |
+
+# Gauss-Legendre com partições
+
+Obviamente, o cálculo inicial (primeira iteração) nunca é suficiente para ser preciso, dada uma tolerância extremamente baixa.
+
+Portanto, assim como Newton-Cotes, é preciso particionar o problema em vários subproblemas, e depois somar tudo a cada iteração. Se o resultado anterior comparado com o atual tiver uma diferença menor que a tolerância, então é um resultado suficiente.
+
+O algoritmo que faz os cálculos de partições é esse:
+
+### TODO
