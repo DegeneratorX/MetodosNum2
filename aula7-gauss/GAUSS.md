@@ -252,20 +252,62 @@ E por aí vai.
 
 Até agora trabalhamos com algumas fórmulas e que disse que iria usar para agora. Irei trazer elas para cá.
 
-$\boxed{\int_{-1}^{1}f(x(t))\frac{b-a}{2}dt}$, $\boxed{x(t) = \frac{b-a}{2}t + \frac{b+a}{2}}$
+Perceba um padrão nas regras do 1 ponto e dos 2 pontos:
+
+EXPRESSÃO 1: $\boxed{I = \int_{a}^{b}f(x)dx \simeq A_1f(x_1) = (b-a)f\left(\frac{b-a}{2}\right)}$
+
+EXPRESSÃO 2: $\boxed{I = \int_{a}^{b}f(x)dx \simeq A_1f(x_1)+A_2f(x_2) = \frac{b-a}{2}f\left[\frac{b-a}{2}\left(-\frac{1}{\sqrt{3}}\right)+\frac{b+a}{2}\right]+\frac{b-a}{2}f\left[\frac{b-a}{2}\left(\frac{1}{\sqrt{3}}\right)+\frac{b+a}{2}\right]}$
+
+Agora perceba a regra da mudança de variável:
+
+EXPRESSÃO 3: $\boxed{\int_{-1}^{1}\frac{b-a}{2}f(x(t))dt}$, com $\boxed{x(t) = \frac{b-a}{2}t + \frac{b+a}{2}}$,
+
+Veja que há a possibilidade de uma equivalência entre a Expressão 3, 1 e 2.
+
+Podemos dizer que $x(t)$ da Expressão 3 está para o que tem dentro de $f$ na Expressão 2 e 1, com $t$ sendo as raízes do polinômio de Legendre.
+
+Perceba também que a cada ponto a mais, elas seguem um padrão de somatório.
+
+E portanto, a fórmula geral do método de Gauss-Legendre é essa:
+
+$$\Large I = \int_{a}^{b}f(x)dx \simeq \boxed{\frac{b-a}{2}[\sum_{k = 1}^{n}f(x(t_k))A_k]}$$
+
+, onde:
+
+- $\boxed{x(t_k) = \frac{a+b}{2}+\frac{b-a}{2}t_k}$;
+
+- $t_k$, com $k = 1,2,...,n$ são as raízes constantes do polinômio $P_n(x)$ de Legendre de grau $n$;
+
+- $A_k$, com $k = 1,2,...,n$ são os pesos constantes correspondentes dados por $A_k = \int_{-1}^{1}L_k(t)dt$, com $L$ sendo um polinômio de Lagrange.
+
 
 Agora irei mudar alguns nomes de variáveis de tal forma que seja compatível com a abordagem do professor Creto:
 
-$\boxed{\int_{-1}^{1}f(x(a))\frac{x_f-x_i}{2}da}$, $\boxed{x(t) = \frac{x_f-x_i}{2}a_k + \frac{x_f+x_i}{2}}$
+As mudanças foram as seguintes:
+- $b \implies x_f$
+- $a \implies x_i$
+- $t \implies a$
+- $A \implies w$
+- $f \implies p$
 
-A fórmula é a seguinte:
+Resultando em:
 
 $$\Large I = \int_{x_i}^{x_f}f(x)dx \simeq \boxed{\frac{x_f-x_i}{2}[\sum_{k = 1}^{n}p(x(a_k))w_k]}$$
 
 , onde:
 
-$\boxed{x(a_k) = \frac{x_i+x_f}{2}+\frac{x_f-x_i}{2}a_k}$;
+- $\boxed{x(a_k) = \frac{x_i+x_f}{2}+\frac{x_f-x_i}{2}a_k}$;
 
-$a_k$, com $k = 1,2,...,n$ são as raízes do polinômio $P_n(x)$ de Legendre de grau $n$;
+- $a_k$, com $k = 1,2,...,n$ são as raízes constantes do polinômio $P_n(x)$ de Legendre de grau $n$;
 
-$w_k$, com $k = 1,2,...,n$ são os pesos correspondentes dados por $w_k = \int_{-1}^{1}L_k(a)da$
+- $w_k$, com $k = 1,2,...,n$ são os pesos constantes correspondentes dados por $w_k = \int_{-1}^{1}L_k(a)da$, com $L$ sendo um polinômio de Lagrange.
+
+Segue a tabela completa de raízes e pesos, de grau 0 até 4 do método de Gauss-Legendre:
+
+| $n$ (grau) | Raízes | Pesos |
+| --- | --- | --- |
+| $0$ | Não possui raízes reais | 0 |
+| $1$ | $0$ | $w_1 = 1$ |
+| $2$ | $\pm\sqrt{\frac{1}{3}}$ | $w_1 = w_2 = 1$  |
+| $3$ | $\pm\sqrt{\frac{3}{5}}$, $0$ | $w_1 = \frac{5}{9}$, $w_2 = \frac{8}{9}$, $w_3 = \frac{5}{9}$ |
+| $4$ | $\pm\sqrt{\left(\frac{(3+2\sqrt{\frac{6}{5}})}{7}\right)}, \pm\sqrt{\left(\frac{(3-2\sqrt{\frac{6}{5}})}{7}\right)}$ | $w_1 = w_4 = \frac{1}{2}-\frac{\sqrt{\frac{5}{6}}}{6}$, $w_2 = w_3 = \frac{1}{36}\cdot( 18+\sqrt{30})$ |
