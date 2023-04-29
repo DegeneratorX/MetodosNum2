@@ -92,6 +92,8 @@ https://youtu.be/Dsf6ADwJ66E
 
 ![](2023-03-17-16-40-19.png)
 
+O fato do seno ser no eixo das ordenadas (y) e o cosseno no eixo das abscissas (x), é porque o seno, por definição, é o cateto oposto (ou seja, a parte em "pé" do triângulo) pela hipotenusa. Já o cosseno é o cateto adjacente (a parte "deitada") sobre a hipotenusa.
+
 # Produtos Notáveis e Fatoração
 
 ![](2023-03-20-09-16-38.png)
