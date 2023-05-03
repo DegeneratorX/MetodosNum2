@@ -318,6 +318,8 @@ Obviamente, o cálculo inicial (primeira iteração) nunca é suficiente para se
 
 Portanto, assim como Newton-Cotes, é preciso particionar o problema em vários subproblemas, e depois somar tudo a cada iteração. Se o resultado anterior comparado com o atual tiver uma diferença menor que a tolerância, então é um resultado suficiente.
 
-O algoritmo que faz os cálculos de partições é esse:
+O algoritmo que faz os cálculos de partições está localizado em 
 
-### TODO
+```
+trabalho_final>integration.py
+```
