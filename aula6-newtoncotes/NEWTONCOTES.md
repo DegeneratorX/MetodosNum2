@@ -202,7 +202,7 @@ def newton_cotes_grau1_fechada(a, b, tol=1e-3):
 
 A regra de Simpsion 1/3 é chamada dessa forma por conta de sua fórmula:
 
-$$\Large I = \int_{a}^{b}f(x)dx \simeq = \boxed{\frac{1}{3}h[f(x_1) + 4f(x_2) + f(x_3)]}$$
+$$\Large I = \int_{a}^{b}f(x)dx \simeq = \boxed{\frac{1}{3}h[f(x_0) + 4f(x_1) + f(x_2)]}$$
 
 , onde,  $\boxed{h = \frac{b-a}{grau}}$, $\boxed{grau = 2}$, e $\boxed{x_i = a + i \cdot h}$
 

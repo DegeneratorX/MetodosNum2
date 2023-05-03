@@ -23,8 +23,8 @@ def newton_cotes_grau4_fechada(a, b, tol=1e-3):
     h = (b-a)/particoes
 
     # Integral
-    #soma = ((2*(b-a)/grau) / 45) * (7*f(a)+32 *f(a+h)+12*f(a+2*h)+32*f(a+3*h)+7*f(b))
-    soma = ((b-a)/2)*(f(a)+f(b))
+    soma = ((2*(b-a)/grau) / 45) * (7*f(a)+32 *f(a+h)+12*f(a+2*h)+32*f(a+3*h)+7*f(b))
+    #soma = ((b-a)/2)*(f(a)+f(b))
     soma_anterior = 0  # Valor necessário pra verificar a tolerância
     soma_atual = soma  # E fazer a subtração desse com o anterior
     erro = abs((soma_atual-soma_anterior)/soma_atual)  # Erro
@@ -52,8 +52,8 @@ def newton_cotes_grau4_fechada(a, b, tol=1e-3):
             x_final = x_inicial+h
 
             # Fórmula do grau 4 fechada
-            #soma = soma + ((2*(x_final-x_inicial)/grau) / 45) * (7*f(x_inicial) + 32*f(x_inicial+h)+12*f(x_inicial+2*h)+32*f(x_inicial+3*h)+7*f(x_final))
-            soma = soma + ((x_final-x_inicial)/2)*(f(x_inicial)+f(x_final))
+            soma = soma + ((2*(x_final-x_inicial)/grau) / 45) * (7*f(x_inicial) + 32*f(x_inicial+h)+12*f(x_inicial+2*h)+32*f(x_inicial+3*h)+7*f(x_final))
+            #soma = soma + ((x_final-x_inicial)/2)*(f(x_inicial)+f(x_final))
         # Feita a soma, guardo o valor anterior e capturo esse novo valor
         soma_anterior = soma_atual
         soma_atual = soma
