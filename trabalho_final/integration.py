@@ -554,7 +554,7 @@ class GaussExponenciacao(Integracao):
             (cls.__f_barra_de_s(cls.__s(x_inicial, x_final, x_4), f, limite_inferior_a, limite_superior_b, exponencial_simples))*w_4))
 
 def h(x):
-    return 2*(math.sqrt(x)+np.cos(x/2))
+    return 1/((x**2)**(1/3))
 
 
 def f(x):
@@ -565,4 +565,4 @@ if __name__ == '__main__':
     # NewtonCotes.integrar(f, a=0, b=1, grau=1, tipo=0)
     # GaussLegendre.integrar(f, a=0, b=1, grau=1)
     # GaussChebychev.integrar(f,grau=4)
-    GaussExponenciacao.integrar()
+    GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=4, exponencial_simples=True)
