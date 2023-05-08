@@ -140,3 +140,9 @@ $$\Large w_k = \int_{-1}^{1}\frac{1}{\sqrt{1-x^2}}Lagrange_k(x)dx \simeq \boxed{
     - $w_1 = w_2 = w_3 = \frac{\pi}{3}$
 - Grau 4:
     - $w_1 = w_2 = w_3 = w_4 = \frac{\pi}{4}$
+
+> Nota: o algoritmo para os gauss especiais estão no arquivo *trabalho_final/integration.py*
+
+# Gauss-Exponenciação
+
+### TODO
