@@ -4,7 +4,7 @@ Existem alguns métodos de integração extras derivados do método de Gauss-Leg
 
 A fórmula geral para **Gauss-Hermite** é:
 
-$$\Large\boxed{I = \int_{-\infty}^{+\infity}e^{-x^2}f(x)dx \simeq \sum_{k = 1}^{n}w_kf(x_k)}$$
+$$\Large\boxed{I = \int_{-\infty}^{+\infty}e^{-x^2}f(x)dx \simeq \sum_{k = 1}^{n}w_kf(x_k)}$$
 
 A fórmula geral para **Gauss-Laguerre** é:
 
