@@ -300,10 +300,10 @@ class GaussHermite(Integracao):
     # Gauss-Hermite grau 4
     @staticmethod
     def __grau_4(f):
-        x_1 = -(np.sqrt(3/2 + np.sqrt(3/2)))
-        x_2 = -(np.sqrt(3/2 - np.sqrt(3/2)))
-        x_3 = +(np.sqrt(3/2 - np.sqrt(3/2)))
-        x_4 = +(np.sqrt(3/2 + np.sqrt(3/2)))
+        x_1 = -(np.sqrt(3/2 + np.sqrt(6)/2))
+        x_2 = -(np.sqrt(3/2 - np.sqrt(6)/2))
+        x_3 = +(np.sqrt(3/2 - np.sqrt(6)/2))
+        x_4 = +(np.sqrt(3/2 + np.sqrt(6)/2))
 
         w_1 = w_4 = np.sqrt(np.pi)/(4*(3 + np.sqrt(6)))
         w_2 = w_3 = -np.sqrt(np.pi)/(4*(np.sqrt(6) - 3))
@@ -358,15 +358,15 @@ class GaussLaguerre(Integracao):
     # Gauss-Laguerre grau 4
     @staticmethod
     def __grau_4(f):
-        x_1 = 0.32255
-        x_2 = 1.7458
-        x_3 = 4.5366
-        x_4 = 9.3951
+        x_1 = 0.32254
+        x_2 = 1.74576
+        x_3 = 4.53662
+        x_4 = 9.39507
 
-        w_1 = 0.603115
-        w_2 = 0.357347
-        w_3 = 0.0388894
-        w_4 = 0.000539278
+        w_1 = 0.60312
+        w_2 = 0.35735
+        w_3 = 0.03889
+        w_4 = 0.00054
 
         return f(x_1)*w_1+f(x_2)*w_2+f(x_3)*w_3+f(x_4)*w_4
 
@@ -571,7 +571,7 @@ def f(x):
 
 if __name__ == '__main__':
     # NewtonCotes.integrar(f, a=0, b=1, grau=1, tipo=0)
+    GaussHermite.integrar(f, grau=4)
     # GaussLegendre.integrar(f, a=0, b=1, grau=1)
     # GaussChebychev.integrar(f,grau=4)
-    GaussExponenciacao.integrar(
-        h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
+    # GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
