@@ -429,9 +429,6 @@ class GaussChebychev(Integracao):
 
 class GaussExponenciacao(Integracao):
 
-    def __init__(self):
-        raise Exception("This class cannot be instantiated.")
-
     @classmethod
     def integrar(cls, f, limite_inferior_a, limite_superior_b, c, grau, exponencial_simples=True, tol=1e-6):
         print("{:^15}{:^15}{:^15}{:^15}{:^15}{:^15}".format("iteracoes",
@@ -571,7 +568,7 @@ def f(x):
 
 if __name__ == '__main__':
     # NewtonCotes.integrar(f, a=0, b=1, grau=1, tipo=0)
-    GaussHermite.integrar(f, grau=4)
+    #GaussHermite.integrar(f, grau=4)
     # GaussLegendre.integrar(f, a=0, b=1, grau=1)
     # GaussChebychev.integrar(f,grau=4)
-    # GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
+    GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
