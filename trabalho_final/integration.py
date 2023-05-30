@@ -565,10 +565,13 @@ def h(x):
 def f(x):
     return (np.sin(2*x)+4*x**2+3*x)**2
 
+def g(x):
+    return (math.e**(-x))*math.sin(4*x)
+
 
 if __name__ == '__main__':
     # NewtonCotes.integrar(f, a=0, b=1, grau=1, tipo=0)
     #GaussHermite.integrar(f, grau=4)
-    # GaussLegendre.integrar(f, a=0, b=1, grau=1)
+    GaussLegendre.integrar(g, a=0, b=4, grau=4)
     # GaussChebychev.integrar(f,grau=4)
-    GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
+    # GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
