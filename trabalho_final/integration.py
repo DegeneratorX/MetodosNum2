@@ -91,7 +91,8 @@ class NewtonCotes(Integracao):
                         print("Grau inválido.")
                         return
                 else:
-                    print("Tipo inválido. A escolha era entre 0 (fechada) e 1 (aberta)")
+                    print(
+                        "Tipo inválido. A escolha era entre 0 (fechada) e 1 (aberta)")
                     return
 
             if primeira_iteracao:
@@ -495,8 +496,9 @@ class GaussExponenciacao(Integracao):
     def __x_de_s_simples(s, limite_inferior_a, limite_superior_b):
         return ((limite_inferior_a+limite_superior_b)/2) + ((limite_superior_b-limite_inferior_a)/2) * np.tanh(s)
 
+    @staticmethod
     def __x_de_s_dupla(s, limite_inferior_a, limite_superior_b):
-        return ((limite_inferior_a+limite_superior_b)/2)+((limite_superior_b-limite_inferior_a))*np.tanh((np.pi/2)*np.sinh(s))
+        return ((limite_inferior_a+limite_superior_b)/2)+((limite_superior_b-limite_inferior_a)/2)*np.tanh((np.pi/2)*np.sinh(s))
 
     # Função f_barra = f(x(s)) * (d x(s)/ds), onde d x(s)/ds é a derivada da função x(s).
     @classmethod
@@ -565,13 +567,22 @@ def h(x):
 def f(x):
     return (np.sin(2*x)+4*x**2+3*x)**2
 
+
 def g(x):
     return (math.e**(-x))*math.sin(4*x)
 
 
+def k(x):
+    return 1/(x**2)**(1/3)
+
+
+def v(x):
+    return 1/math.sqrt((4-x**2))
+
+
 if __name__ == '__main__':
     # NewtonCotes.integrar(f, a=0, b=1, grau=1, tipo=0)
-    #GaussHermite.integrar(f, grau=4)
-    GaussLegendre.integrar(g, a=0, b=4, grau=4)
+    # GaussHermite.integrar(f, grau=4)
+    # GaussLegendre.integrar(k, a=-1, b=1, grau=1, tol=10e-3)
     # GaussChebychev.integrar(f,grau=4)
-    # GaussExponenciacao.integrar(h, limite_inferior_a=2, limite_superior_b=20, c=2, grau=1, exponencial_simples=True)
+    GaussExponenciacao.integrar(k, limite_inferior_a=-1, limite_superior_b=1,c=3, grau=4, exponencial_simples=False, tol=10e-3)
