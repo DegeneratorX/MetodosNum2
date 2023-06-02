@@ -560,23 +560,13 @@ class GaussExponenciacao(Integracao):
              (cls.__f_barra_de_s(cls.__s(x_inicial, x_final, x_4), f, limite_inferior_a, limite_superior_b, exponencial_simples))*w_4))
 
 
-def h(x):
-    return 1/((x**2)**(1/3))
-
-
-def f(x):
+def a(x):
     return (np.sin(2*x)+4*x**2+3*x)**2
-
-
-def g(x):
+def b(x):
     return (math.e**(-x))*math.sin(4*x)
-
-
-def k(x):
+def c(x):
     return 1/(x**2)**(1/3)
-
-
-def v(x):
+def d(x):
     return 1/math.sqrt((4-x**2))
 
 
@@ -585,4 +575,7 @@ if __name__ == '__main__':
     # GaussHermite.integrar(f, grau=4)
     # GaussLegendre.integrar(k, a=-1, b=1, grau=1, tol=10e-3)
     # GaussChebychev.integrar(f,grau=4)
-    GaussExponenciacao.integrar(k, limite_inferior_a=-1, limite_superior_b=1,c=3, grau=4, exponencial_simples=False, tol=10e-3)
+    GaussExponenciacao.integrar(c, limite_inferior_a=-1, limite_superior_b=1, c=3, grau=4, exponencial_simples=True, tol=10e-3)
+    GaussExponenciacao.integrar(c, limite_inferior_a=-1, limite_superior_b=1, c=3, grau=4, exponencial_simples=False, tol=10e-3)
+    GaussExponenciacao.integrar(d, limite_inferior_a=-2, limite_superior_b=0, c=15, grau=4, exponencial_simples=True, tol=10e-10)
+    GaussExponenciacao.integrar(d, limite_inferior_a=-2, limite_superior_b=0, c=3, grau=4, exponencial_simples=False, tol=10e-10)
