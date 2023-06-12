@@ -323,3 +323,19 @@ O algoritmo que faz os cálculos de partições está localizado em
 ```
 trabalho_final>integration.py
 ```
+
+# Resumo
+
+O método de Gauss-Legendre utiliza o polinômio de Legendre para obter os pontos de interpolação (nós de Gauss) e os pesos correspondentes para a integração numérica.
+
+O polinômio de Legendre foi escolhido, por formar um conjunto ortogonal no intervalo $[-1, 1]$, e essa propriedade minimiza o erro de integração e maximiza a precisão.
+
+Os pesos ponderam a contribuição de cada ponto de interpolação, pois cada ponto tem um peso associado. Pontos com pesos maiores têm uma influência maior na integral aproximada, enquanto pontos com pesos menores têm uma influência menor. Ao utilizar esses pesos adequados, o método de Gauss-Legendre consegue obter uma precisão elevada na integração numérica, mesmo utilizando um número relativamente pequeno de pontos de interpolação.
+
+Quanto maior o grau da quadratura, maior será o número de interpolação, e maior a precisão, porém o cálculo se torna mais complexo, pois envolverá mais pontos de interpolação e pesos.
+
+A diferença para Newton-Cotes é que os pontos de interpolação são escolhidos cuidadosamente para minimizar o erro de integração, pois são distribuidos simetricamente ao redor do centro do intervalo de integração e são combinados com pesos apropriados para concentrar em regiões de maior variação de curva. Newton-Cotes por outro lado os pontos de interpolação são igualmente espaçados, mas com polinômios de grau baixo que são ligados, como trapézios ou parábolas.
+
+O método de Gauss-Legendre aproxima a integral a um intervalo entre -1 e 1 e está relacionado à técnica de transformação de intervalo conhecida como mudança de variáveis. Ao realizar uma mudança de variáveis, o objetivo é transformar o intervalo de integração original em um intervalo padronizado, onde a integração é mais conveniente e precisa. No caso do método de Gauss-Legendre, a escolha do intervalo padronizado entre -1 e 1 é feita para aproveitar as propriedades especiais dos polinômios de Legendre.
+
+Embora o cálculo da integral seja realizado no intervalo padronizado $[-1, 1]$, é possível obter o resultado correspondente para o intervalo original $[a, b]$ por meio da aplicação da mudança de variáveis inversa.
