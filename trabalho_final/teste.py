@@ -1,1 +1,2 @@
-print(10%6)
+vetor = [[5]]
+print(vetor)
