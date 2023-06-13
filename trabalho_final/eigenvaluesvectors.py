@@ -56,6 +56,7 @@ class Potencia:
                 x = np.squeeze(x)
                 return autovalor_atual, x
 
+
 def dividir_intervalos(a, b, tam_matriz):
     passo = (b - a) / (tam_matriz - 1)
     return [a + i * passo for i in range(tam_matriz)]

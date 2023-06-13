@@ -1,4 +1,6 @@
 # Dupla: Victor Martins e Luiz Gustavo
+# Numerical Methods for Enginerinng
+# Teorema dos discos (circulos) de gershgorin
 import scipy.linalg as sci
 import numpy as np
 
@@ -56,10 +58,29 @@ class Potencia:
                 x = np.squeeze(x)
                 return autovalor_atual, x
 
+
 def dividir_intervalos(a, b, tam_matriz):
     passo = (b - a) / (tam_matriz - 1)
     return [a + i * passo for i in range(tam_matriz)]
 
+def gerar_deslocamentos_por_discos(discos, tam_matriz):
+    deslocamentos = []
+    for disco in discos:
+        centro, raio = disco
+        inicio = centro - raio
+        fim = centro + raio
+        pontos = np.linspace(inicio, fim, num=tam_matriz)
+        deslocamentos.extend(pontos)
+    return deslocamentos
+
+def gerar_discos_de_gerschgorin(matriz):
+    discos = []
+    for i in range(matriz.shape[0]):
+        centro = matriz[i, i]
+        raio = np.sum(np.abs(matriz[i, :])) - np.abs(matriz[i, i])
+        disco = (centro, raio)
+        discos.append(disco)
+    return discos
 
 def main():
     matriz_1 = np.array([[5, 2, 1],
@@ -91,6 +112,10 @@ def main():
     vetor_de_deslocamentos_matriz_1 = dividir_intervalos(np.floor(minimo_matriz_1[0]), np.ceil(dominante_matriz_1[0]), tam_matriz=matriz_1.shape[0])
     vetor_de_deslocamentos_matriz_2 = dividir_intervalos(np.floor(minimo_matriz_2[0]), np.ceil(dominante_matriz_2[0]), tam_matriz=matriz_2.shape[0])
     vetor_de_deslocamentos_matriz_3 = dividir_intervalos(np.floor(minimo_matriz_3[0]), np.ceil(dominante_matriz_3[0]), tam_matriz=matriz_3.shape[0])
+    #vetor_de_deslocamentos_matriz_1 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_1), matriz_1.shape[0])
+    #print(vetor_de_deslocamentos_matriz_1)
+    #vetor_de_deslocamentos_matriz_2 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_2), matriz_2.shape[0])
+    #vetor_de_deslocamentos_matriz_3 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_3), matriz_3.shape[0])
 
     print()
     # Matriz 1:
