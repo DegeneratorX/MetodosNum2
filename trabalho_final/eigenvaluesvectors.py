@@ -1,14 +1,16 @@
 # Dupla: Victor Martins e Luiz Gustavo
 import scipy.linalg as sci
 import numpy as np
+from copy import deepcopy
 
 
 class Potencia:
 
     @classmethod
-    def potencia_com_deslocamento(cls, matriz, deslocamento):
-        matriz = matriz-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz
-        autovalor, autovetor = cls.potencia_inversa(matriz) # Calculo a potência inversa dessa nova matriz
+    def potencia_com_deslocamento(cls, matriz, deslocamento, tol=10e-6):
+        matriz_aux = deepcopy(matriz)
+        matriz_aux = matriz_aux-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz
+        autovalor, autovetor = cls.potencia_inversa(matriz_aux, tol) # Calculo a potência inversa dessa nova matriz
         autovalor = autovalor + deslocamento # "Desloco" o autovalor dela
         return autovalor, autovetor
 
@@ -55,7 +57,7 @@ class Potencia:
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
                 return autovalor_atual, x
-
+            
 
 def dividir_intervalos(a, b, tam_matriz):
     passo = (b - a) / (tam_matriz - 1)
@@ -92,7 +94,7 @@ def main():
     vetor_de_deslocamentos_matriz_1 = dividir_intervalos(np.floor(minimo_matriz_1[0]), np.ceil(dominante_matriz_1[0]), tam_matriz=matriz_1.shape[0])
     vetor_de_deslocamentos_matriz_2 = dividir_intervalos(np.floor(minimo_matriz_2[0]), np.ceil(dominante_matriz_2[0]), tam_matriz=matriz_2.shape[0])
     vetor_de_deslocamentos_matriz_3 = dividir_intervalos(np.floor(minimo_matriz_3[0]), np.ceil(dominante_matriz_3[0]), tam_matriz=matriz_3.shape[0])
-
+    print(vetor_de_deslocamentos_matriz_1)
     print()
     # Matriz 1:
     print("============MATRIZ 1=============")
