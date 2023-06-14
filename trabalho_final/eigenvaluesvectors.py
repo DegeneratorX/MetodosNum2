@@ -9,54 +9,54 @@ class Potencia:
     @classmethod
     def potencia_com_deslocamento(cls, matriz, deslocamento, tol=10e-6):
         matriz_aux = deepcopy(matriz)
-        matriz_aux = matriz_aux-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz
-        autovalor, autovetor = cls.potencia_inversa(matriz_aux, tol) # Calculo a potência inversa dessa nova matriz
-        autovalor = autovalor + deslocamento # "Desloco" o autovalor dela
-        return autovalor, autovetor
+        matriz_aux = matriz_aux-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz (passo 1)
+        autovalor, autovetor = cls.potencia_inversa(matriz_aux, tol) # Calculo a potência inversa dessa nova matriz (passo 2)
+        autovalor = autovalor + deslocamento # "Desloco" o autovalor dela (passo 3)
+        return autovalor, autovetor # passo 5
 
     @classmethod
     def potencia_regular(cls, matriz, tol=10e-6):
-        tam = matriz.shape[0]  # Tamanho da matriz
-        vetor_atual = np.ones((tam, 1))         # Crio um vetor arbitrário de valor 1, com apenas 1 coluna
-        autovalor_atual = 0 # Inicializo o autovalor atual como zero
+        tam = matriz.shape[0]  # Tamanho da matriz (passo 1)
+        vetor_atual = np.ones((tam, 1))         # Crio um vetor arbitrário de valor 1, com apenas 1 coluna (passo 3)
+        autovalor_atual = 0 # Inicializo o autovalor atual como zero (passo 2)
 
         converge = True
-        while converge:
-            autovalor_anterior = autovalor_atual # Guardo o autovalor anterior para efeito de comparação
-            vetor_anterior = vetor_atual # Faço o mesmo para o vetor
-            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # defino x como sendo a normalização do vetor velho
+        while converge: # inicio da iteração
+            autovalor_anterior = autovalor_atual # Guardo o autovalor anterior para efeito de comparação (passo 4)
+            vetor_anterior = vetor_atual # Faço o mesmo para o vetor (passo 5)
+            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # defino x como sendo a normalização do vetor velho (passo 6)
 
-            vetor_atual = np.matmul(matriz, x) # Faço o produto da matriz recebida com x e o resultado é um novo vetor
-            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # e um novo autovalor é o produto desse vetor atual com a transposta de x.
+            vetor_atual = np.matmul(matriz, x) # Faço o produto da matriz recebida com x e o resultado é um novo vetor (passo 7)
+            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # e um novo autovalor é o produto desse vetor atual com a transposta de x. (passo 8)
 
-            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # Erro
-            if erro < tol: # Se atingiu a tolerância, para o algoritmo. Caso não, converge mais.
+            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # Erro (passo 9)
+            if erro < tol: # Se atingiu a tolerância, para o algoritmo. Caso não, converge mais. (passo 10)
                 autovalor_atual = np.squeeze(autovalor_atual) # Retiro os 2 brackets do autovalor, pois estava dentro de lista dentro de lista
                 x = np.squeeze(x) # Retiro 1 bracket do autovetor, pois previamente estava em uma lista 2D
                 return autovalor_atual, x
 
     @classmethod
     def potencia_inversa(cls, matriz, tol=10e-6):
-        tam = matriz.shape[0]
-        vetor_atual = np.ones((tam, 1))
-        lu, pivo = sci.lu_factor(matriz) # A diferença pra regular é que aqui preciso fatorar em LU e guardar o pivô
+        tam = matriz.shape[0] # (passo 1)
+        vetor_atual = np.ones((tam, 1)) # (passo 4)
+        lu, pivo = sci.lu_factor(matriz) # A diferença pra regular é que aqui preciso fatorar em LU e guardar o pivô (passo 2)
 
-        autovalor_atual = 0
+        autovalor_atual = 0 # (passo 3)
         converge = True
-        while converge:
-            autovalor_anterior = autovalor_atual
-            vetor_anterior = vetor_atual
-            x = vetor_anterior / (np.linalg.norm(vetor_anterior))
+        while converge: # inicio da iteração
+            autovalor_anterior = autovalor_atual # (passo 5)
+            vetor_anterior = vetor_atual # (passo 6)
+            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # (passo 7)
 
-            vetor_atual = sci.lu_solve((lu, pivo), x) # Uso os termos decompostos e soluciono o sistema linear
-            autovalor_atual = np.matmul(np.transpose(x), vetor_atual)
+            vetor_atual = sci.lu_solve((lu, pivo), x) # Uso os termos decompostos e soluciono o sistema linear (passo 8)
+            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # (passo 9)
 
-            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual)
-            if erro < tol:
-                autovalor_atual = 1/autovalor_atual # Inverto o autovalor, como mostrado no classroom.
+            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # (passo 10)
+            if erro < tol: # (passo 11) 
+                autovalor_atual = 1/autovalor_atual # Inverto o autovalor, como mostrado no classroom. (passo 11)
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
-                return autovalor_atual, x
+                return autovalor_atual, x # (passo 13)
             
 
 def dividir_intervalos(a, b, tam_matriz):
