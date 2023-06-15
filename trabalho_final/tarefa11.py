@@ -1,86 +1,63 @@
 # Dupla: Victor Martins e Luiz Gustavo
-# Numerical Methods for Enginerinng
-# Teorema dos discos (circulos) de gershgorin
 import scipy.linalg as sci
 import numpy as np
+from copy import deepcopy
 
 
 class Potencia:
 
     @classmethod
-    def potencia_com_deslocamento(cls, matriz, deslocamento):
-        matriz = matriz-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz
-        autovalor, autovetor = cls.potencia_inversa(matriz) # Calculo a potência inversa dessa nova matriz
-        autovalor = autovalor + deslocamento # "Desloco" o autovalor dela
-        return autovalor, autovetor
+    def potencia_com_deslocamento(cls, matriz, deslocamento, tol=10e-6):
+        matriz_aux = deepcopy(matriz)
+        matriz_aux = matriz_aux-(deslocamento * np.eye(matriz.shape[0])) # Desloco a matriz (passo 1)
+        autovalor, autovetor = cls.potencia_inversa(matriz_aux, tol) # Calculo a potência inversa dessa nova matriz (passo 2)
+        autovalor = autovalor + deslocamento # "Desloco" o autovalor dela (passo 3)
+        return autovalor, autovetor # passo 5
 
     @classmethod
     def potencia_regular(cls, matriz, tol=10e-6):
-        tam = matriz.shape[0]  # Tamanho da matriz
-        vetor_atual = np.ones((tam, 1))         # Crio um vetor arbitrário de valor 1, com apenas 1 coluna
-        autovalor_atual = 0 # Inicializo o autovalor atual como zero
+        tam = matriz.shape[0]  # Tamanho da matriz (passo 1)
+        vetor_atual = np.ones((tam, 1))         # Crio um vetor arbitrário de valor 1, com apenas 1 coluna (passo 3)
+        autovalor_atual = 0 # Inicializo o autovalor atual como zero (passo 2)
 
         converge = True
-        while converge:
-            autovalor_anterior = autovalor_atual # Guardo o autovalor anterior para efeito de comparação
-            vetor_anterior = vetor_atual # Faço o mesmo para o vetor
-            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # defino x como sendo a normalização do vetor velho
+        while converge: # inicio da iteração
+            autovalor_anterior = autovalor_atual # Guardo o autovalor anterior para efeito de comparação (passo 4)
+            vetor_anterior = vetor_atual # Faço o mesmo para o vetor (passo 5)
+            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # defino x como sendo a normalização do vetor velho (passo 6)
 
-            vetor_atual = np.matmul(matriz, x) # Faço o produto da matriz recebida com x e o resultado é um novo vetor
-            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # e um novo autovalor é o produto desse vetor atual com a transposta de x.
+            vetor_atual = np.matmul(matriz, x) # Faço o produto da matriz recebida com x e o resultado é um novo vetor (passo 7)
+            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # e um novo autovalor é o produto desse vetor atual com a transposta de x. (passo 8)
 
-            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # Erro
-            if erro < tol: # Se atingiu a tolerância, para o algoritmo. Caso não, converge mais.
+            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # Erro (passo 9)
+            if erro < tol: # Se atingiu a tolerância, para o algoritmo. Caso não, converge mais. (passo 10)
                 autovalor_atual = np.squeeze(autovalor_atual) # Retiro os 2 brackets do autovalor, pois estava dentro de lista dentro de lista
                 x = np.squeeze(x) # Retiro 1 bracket do autovetor, pois previamente estava em uma lista 2D
                 return autovalor_atual, x
 
     @classmethod
     def potencia_inversa(cls, matriz, tol=10e-6):
-        tam = matriz.shape[0]
-        vetor_atual = np.ones((tam, 1))
-        lu, pivo = sci.lu_factor(matriz) # A diferença pra regular é que aqui preciso fatorar em LU e guardar o pivô
+        tam = matriz.shape[0] # (passo 1)
+        vetor_atual = np.ones((tam, 1)) # (passo 4)
+        lu, pivo = sci.lu_factor(matriz) # A diferença pra regular é que aqui preciso fatorar em LU e guardar o pivô (passo 2)
 
-        autovalor_atual = 0
+        autovalor_atual = 0 # (passo 3)
         converge = True
-        while converge:
-            autovalor_anterior = autovalor_atual
-            vetor_anterior = vetor_atual
-            x = vetor_anterior / (np.linalg.norm(vetor_anterior))
+        while converge: # inicio da iteração
+            autovalor_anterior = autovalor_atual # (passo 5)
+            vetor_anterior = vetor_atual # (passo 6)
+            x = vetor_anterior / (np.linalg.norm(vetor_anterior)) # (passo 7)
 
-            vetor_atual = sci.lu_solve((lu, pivo), x) # Uso os termos decompostos e soluciono o sistema linear
-            autovalor_atual = np.matmul(np.transpose(x), vetor_atual)
+            vetor_atual = sci.lu_solve((lu, pivo), x) # Uso os termos decompostos e soluciono o sistema linear (passo 8)
+            autovalor_atual = np.matmul(np.transpose(x), vetor_atual) # (passo 9)
 
-            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual)
-            if erro < tol:
-                autovalor_atual = 1/autovalor_atual # Inverto o autovalor, como mostrado no classroom.
+            erro = abs((autovalor_atual-autovalor_anterior)/autovalor_atual) # (passo 10)
+            if erro < tol: # (passo 11) 
+                autovalor_atual = 1/autovalor_atual # Inverto o autovalor, como mostrado no classroom. (passo 11)
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
-                return autovalor_atual, x
+                return autovalor_atual, x # (passo 13)
 
-
-def dividir_intervalos(a, b, tam_matriz):
-    passo = (b - a) / (tam_matriz - 1)
-    return [a + i * passo for i in range(tam_matriz)]
-
-def gerar_deslocamentos_por_discos(discos, tam_matriz):
-    deslocamentos = []
-    for disco in discos:
-        centro, raio = disco
-        inicio = centro - raio
-        fim = centro + raio
-        pontos = np.linspace(inicio, fim, num=tam_matriz)
-        deslocamentos.extend(pontos)
-    return deslocamentos
-
-def gerar_discos_de_gerschgorin(matriz):
-    discos = []
-    for i in range(matriz.shape[0]):
-        centro = matriz[i, i]
-        raio = np.sum(np.abs(matriz[i, :])) - np.abs(matriz[i, i])
-        disco = (centro, raio)
-        discos.append(disco)
-    return discos
 
 def main():
     matriz_1 = np.array([[5, 2, 1],
@@ -109,20 +86,16 @@ def main():
     minimo_matriz_3 = Potencia.potencia_inversa(matriz_3)
 
     # Crio vetores que contém números com espaços iguais entre o menor e maior autovalor das matrizes 1 a 3.
-    vetor_de_deslocamentos_matriz_1 = dividir_intervalos(np.floor(minimo_matriz_1[0]), np.ceil(dominante_matriz_1[0]), tam_matriz=matriz_1.shape[0])
-    vetor_de_deslocamentos_matriz_2 = dividir_intervalos(np.floor(minimo_matriz_2[0]), np.ceil(dominante_matriz_2[0]), tam_matriz=matriz_2.shape[0])
-    vetor_de_deslocamentos_matriz_3 = dividir_intervalos(np.floor(minimo_matriz_3[0]), np.ceil(dominante_matriz_3[0]), tam_matriz=matriz_3.shape[0])
-    #vetor_de_deslocamentos_matriz_1 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_1), matriz_1.shape[0])
-    #print(vetor_de_deslocamentos_matriz_1)
-    #vetor_de_deslocamentos_matriz_2 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_2), matriz_2.shape[0])
-    #vetor_de_deslocamentos_matriz_3 = gerar_deslocamentos_por_discos(gerar_discos_de_gerschgorin(matriz_3), matriz_3.shape[0])
+    vetor_de_deslocamentos_matriz_1 = [np.floor(minimo_matriz_1[0]), 4.0, np.ceil(dominante_matriz_1[0])]
+    vetor_de_deslocamentos_matriz_2 = [np.floor(minimo_matriz_2[0]), -8.0, np.ceil(dominante_matriz_2[0])]
+    vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
 
     print()
     # Matriz 1:
     print("============MATRIZ 1=============")
     for deslocamento in vetor_de_deslocamentos_matriz_1:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_1, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()
@@ -131,7 +104,7 @@ def main():
     print("============MATRIZ 2=============")
     for deslocamento in vetor_de_deslocamentos_matriz_2:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_2, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()
@@ -140,7 +113,7 @@ def main():
     print("============MATRIZ 3=============")
     for deslocamento in vetor_de_deslocamentos_matriz_3:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_3, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()

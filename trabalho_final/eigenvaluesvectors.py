@@ -57,11 +57,6 @@ class Potencia:
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
                 return autovalor_atual, x # (passo 13)
-            
-
-def dividir_intervalos(a, b, tam_matriz):
-    passo = (b - a) / (tam_matriz - 1)
-    return [a + i * passo for i in range(tam_matriz)]
 
 
 def main():
@@ -91,16 +86,16 @@ def main():
     minimo_matriz_3 = Potencia.potencia_inversa(matriz_3)
 
     # Crio vetores que contém números com espaços iguais entre o menor e maior autovalor das matrizes 1 a 3.
-    vetor_de_deslocamentos_matriz_1 = dividir_intervalos(np.floor(minimo_matriz_1[0]), np.ceil(dominante_matriz_1[0]), tam_matriz=matriz_1.shape[0])
-    vetor_de_deslocamentos_matriz_2 = dividir_intervalos(np.floor(minimo_matriz_2[0]), np.ceil(dominante_matriz_2[0]), tam_matriz=matriz_2.shape[0])
-    vetor_de_deslocamentos_matriz_3 = dividir_intervalos(np.floor(minimo_matriz_3[0]), np.ceil(dominante_matriz_3[0]), tam_matriz=matriz_3.shape[0])
+    vetor_de_deslocamentos_matriz_1 = [np.floor(minimo_matriz_1[0]), 4.0, np.ceil(dominante_matriz_1[0])]
+    vetor_de_deslocamentos_matriz_2 = [np.floor(minimo_matriz_2[0]), -8.0, np.ceil(dominante_matriz_2[0])]
+    vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
 
     print()
     # Matriz 1:
     print("============MATRIZ 1=============")
     for deslocamento in vetor_de_deslocamentos_matriz_1:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_1, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()
@@ -109,7 +104,7 @@ def main():
     print("============MATRIZ 2=============")
     for deslocamento in vetor_de_deslocamentos_matriz_2:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_2, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()
@@ -118,7 +113,7 @@ def main():
     print("============MATRIZ 3=============")
     for deslocamento in vetor_de_deslocamentos_matriz_3:
         autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_3, deslocamento)
-        print(f"Deslocamento feito: {deslocamento}")
+        print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
         print()
