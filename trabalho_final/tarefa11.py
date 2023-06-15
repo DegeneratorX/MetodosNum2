@@ -85,7 +85,7 @@ def main():
     minimo_matriz_2 = Potencia.potencia_inversa(matriz_2)
     minimo_matriz_3 = Potencia.potencia_inversa(matriz_3)
 
-    # Crio vetores que contém números com espaços iguais entre o menor e maior autovalor das matrizes 1 a 3.
+    # Crio vetores com estimativas de deslocamentos baseado no intervalo entre o autovalor mínimo e o dominante
     vetor_de_deslocamentos_matriz_1 = [np.floor(minimo_matriz_1[0]), 4.0, np.ceil(dominante_matriz_1[0])]
     vetor_de_deslocamentos_matriz_2 = [np.floor(minimo_matriz_2[0]), -8.0, np.ceil(dominante_matriz_2[0])]
     vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
