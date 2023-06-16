@@ -4,7 +4,7 @@ import numpy as np
 from copy import deepcopy
 
 
-class Potencia:
+class AutoValoresVetores:
 
     @classmethod
     def potencia_com_deslocamento(cls, matriz, deslocamento, tol=10e-6):
@@ -57,6 +57,10 @@ class Potencia:
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
                 return autovalor_atual, x # (passo 13)
+            
+
+    def householder(matriz):
+        tamanho
 
 
 def main():
@@ -76,14 +80,14 @@ def main():
 
 
     # Tupla contendo autovalores e autovetores dominantes. (autovalores, autovetores)
-    dominante_matriz_1 = Potencia.potencia_regular(matriz_1)
-    dominante_matriz_2 = Potencia.potencia_regular(matriz_2)
-    dominante_matriz_3 = Potencia.potencia_regular(matriz_3)
+    dominante_matriz_1 = AutoValoresVetores.potencia_regular(matriz_1)
+    dominante_matriz_2 = AutoValoresVetores.potencia_regular(matriz_2)
+    dominante_matriz_3 = AutoValoresVetores.potencia_regular(matriz_3)
 
     # Tuplas contendo autovalores e autovetores mínimos (de menor valor absoluto)
-    minimo_matriz_1 = Potencia.potencia_inversa(matriz_1)
-    minimo_matriz_2 = Potencia.potencia_inversa(matriz_2)
-    minimo_matriz_3 = Potencia.potencia_inversa(matriz_3)
+    minimo_matriz_1 = AutoValoresVetores.potencia_inversa(matriz_1)
+    minimo_matriz_2 = AutoValoresVetores.potencia_inversa(matriz_2)
+    minimo_matriz_3 = AutoValoresVetores.potencia_inversa(matriz_3)
 
     # Crio vetores que contém números entre o menor e maior autovalor das matrizes 1 a 3.
     vetor_de_deslocamentos_matriz_1 = [np.floor(minimo_matriz_1[0]), 4.0, np.ceil(dominante_matriz_1[0])]
@@ -93,8 +97,11 @@ def main():
     print()
     # Matriz 1:
     print("============MATRIZ 1=============")
+    for i in matriz_1:
+        print(i)
+    print()
     for deslocamento in vetor_de_deslocamentos_matriz_1:
-        autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_1, deslocamento)
+        autovalor, autovetor = AutoValoresVetores.potencia_com_deslocamento(matriz_1, deslocamento)
         print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
@@ -102,8 +109,11 @@ def main():
     print("\n")
     # Matriz 2:
     print("============MATRIZ 2=============")
+    for i in matriz_2:
+        print(i)
+    print()
     for deslocamento in vetor_de_deslocamentos_matriz_2:
-        autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_2, deslocamento)
+        autovalor, autovetor = AutoValoresVetores.potencia_com_deslocamento(matriz_2, deslocamento)
         print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
@@ -111,8 +121,11 @@ def main():
     print("\n")
     # Matriz 3:
     print("============MATRIZ 3=============")
+    for i in matriz_3:
+        print(i)
+    print()
     for deslocamento in vetor_de_deslocamentos_matriz_3:
-        autovalor, autovetor = Potencia.potencia_com_deslocamento(matriz_3, deslocamento)
+        autovalor, autovetor = AutoValoresVetores.potencia_com_deslocamento(matriz_3, deslocamento)
         print(f"Deslocamento: {deslocamento}")
         print(f"Autovalor: {autovalor}")
         print(f"Autovetor associado: {autovetor}")
