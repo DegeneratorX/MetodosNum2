@@ -58,12 +58,35 @@ class AutoValoresVetores:
                 x = np.squeeze(x)
                 return autovalor_atual, x # (passo 13)
             
+    @classmethod
+    def householder(cls, matriz):
+        tam = matriz.shape[0] # (passo 1)
+        matriz_householder = np.eye(tam) # (passo 1)
+        matriz_anterior = matriz # (passo 2)
+        for i in range(tam-2):
+            householder_i = cls._matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i)
+            matriz = np.matmul(np.matmul(np.transpose(householder_i), matriz_anterior), householder_i)
+            matriz_anterior = matriz
+            matriz_householder = np.matmul(matriz_householder, householder_i)
+        return matriz, matriz_householder
 
-    def householder(matriz):
-        tamanho
 
 
-def main():
+    @staticmethod
+    def _matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i):
+        tam = matriz_anterior.shape[0]
+        w = np.zeros(tam)
+        w_linha = np.zeros(tam)
+
+        w[i+1:tam] = matriz_anterior[i+1:tam,i]
+        w_linha[i+1] = np.linalg.norm(w)
+        n = w - w_linha
+        n = n/np.linalg.norm(n)
+        householder_i = np.eye(tam) - (2*(np.matmul(n, np.transpose(n))))
+        return householder_i
+
+
+def tarefa11():
     matriz_1 = np.array([[5, 2, 1],
                          [2, 3, 1],
                          [1, 1, 2]])
@@ -132,5 +155,40 @@ def main():
         print()
     print("\n")
 
+def tarefa12():
+    matriz_3 = np.array([[40, 8, 4, 2, 1],
+                         [8, 30, 12, 6, 2],
+                         [4, 12, 20, 1, 2],
+                         [2, 6, 1, 25, 4],
+                         [1, 2, 2, 4, 5]])
+    
+    matriz_3_barra, matriz_householder = AutoValoresVetores.householder(matriz_3)
+    
+    dominante_matriz_3 = AutoValoresVetores.potencia_regular(matriz_3_barra)
+    minimo_matriz_3 = AutoValoresVetores.potencia_inversa(matriz_3_barra)
+    vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
+
+    print("============MATRIZ 3=============")
+    for i in matriz_3:
+        print(i)
+    print()
+    print("============MATRIZ 3 BARRA=============")
+    for i in matriz_3_barra:
+        print(i)
+    print()
+    print("============MATRIZ HOUSEHOLDER ACUMULADA=============")
+    for i in matriz_householder:
+        print(i)
+    print()
+    for deslocamento in vetor_de_deslocamentos_matriz_3:
+        autovalor, autovetor = AutoValoresVetores.potencia_com_deslocamento(matriz_3_barra, deslocamento)
+        print(f"Deslocamento: {deslocamento}")
+        print(f"Autovalor: {autovalor}")
+        print(f"Autovetor associado: {autovetor}")
+        print()
+    print("\n")
+
+
 if __name__ == '__main__':
-    main()
+    #tarefa11()
+    tarefa12()
