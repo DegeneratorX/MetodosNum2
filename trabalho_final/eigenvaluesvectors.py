@@ -4,6 +4,7 @@ import numpy as np
 from copy import deepcopy
 
 
+
 class AutoValoresVetores:
 
     @classmethod
@@ -79,13 +80,20 @@ class AutoValoresVetores:
         w_linha = np.zeros(tam)
 
         w[i+1:tam] = matriz_anterior[i+1:tam,i]
-        w_linha[i+1] = np.linalg.norm(w)
+
+        w_linha[i+1] = np.linalg.norm(w) # sign() garante cumprir o requisito da transformação de HH
+        # O motivo é que a transformação de HH requer que o vetor espelho tenha o sinal oposto comparado com o
+        # vetor original.
+        # Ou seja, adicionando -np.sign(w[i+1]), explicitamente estou assegunrando que "w_linha[i+1]" é oposto de
+        # w[i+1]. Esse ajuste é necessário pra computar corretamente o vetor de reflexo "n".
         n = w - w_linha
         n = n/np.linalg.norm(n)
-        householder_i = np.eye(tam) - (2*(np.matmul(n, np.transpose(n))))
+        n = [[i] for i in n]
+        householder_i = np.eye(tam) - 2*np.matmul(n, np.transpose(n))
         return householder_i
 
 
+np.set_printoptions(precision=6, suppress=True)
 def tarefa11():
     matriz_1 = np.array([[5, 2, 1],
                          [2, 3, 1],
