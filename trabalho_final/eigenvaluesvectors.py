@@ -35,6 +35,7 @@ class AutoValoresVetores:
                 autovalor_atual = np.squeeze(autovalor_atual) # Retiro os 2 brackets do autovalor, pois estava dentro de lista dentro de lista
                 x = np.squeeze(x) # Retiro 1 bracket do autovetor, pois previamente estava em uma lista 2D
                 return autovalor_atual, x
+        return None, None
 
     @classmethod
     def potencia_inversa(cls, matriz, tol=10e-6):
@@ -58,7 +59,8 @@ class AutoValoresVetores:
                 autovalor_atual = np.squeeze(autovalor_atual)
                 x = np.squeeze(x)
                 return autovalor_atual, x # (passo 13)
-            
+        return None, None
+    
     @classmethod
     def householder(cls, matriz):
         tam = matriz.shape[0] # (passo 1)
@@ -71,8 +73,6 @@ class AutoValoresVetores:
             matriz_householder = np.matmul(matriz_householder, householder_i)
         return matriz, matriz_householder
 
-
-
     @staticmethod
     def _matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i):
         tam = matriz_anterior.shape[0]
@@ -81,19 +81,65 @@ class AutoValoresVetores:
 
         w[i+1:tam] = matriz_anterior[i+1:tam,i]
 
-        w_linha[i+1] = np.linalg.norm(w) # sign() garante cumprir o requisito da transformação de HH
-        # O motivo é que a transformação de HH requer que o vetor espelho tenha o sinal oposto comparado com o
-        # vetor original.
-        # Ou seja, adicionando -np.sign(w[i+1]), explicitamente estou assegunrando que "w_linha[i+1]" é oposto de
-        # w[i+1]. Esse ajuste é necessário pra computar corretamente o vetor de reflexo "n".
+        w_linha[i+1] = np.linalg.norm(w)
+
         n = w - w_linha
         n = n/np.linalg.norm(n)
-        n = [[i] for i in n]
+        n = [[i] for i in n] # Recoloco os valores em formato [[a], [b], [c]]...
+        # ...assim n fica [[a], [b], [c]] (coluna) e n transposto fica [[a, b, c]] (linha).
+
         householder_i = np.eye(tam) - 2*np.matmul(n, np.transpose(n))
         return householder_i
 
+    @classmethod
+    def qr(cls, matriz, tol=10e-6):
+        tam = matriz.shape[0]
+        p = np.eye(tam)
+        val = 100
+        matriz_anterior = deepcopy(matriz)
+
+        converge = True
+        while converge:
+            q, r = cls._decomposicao_qr(matriz_anterior, tam)
+            matriz = np.matmul(r, q)
+            matriz_anterior = deepcopy(matriz)
+            p = np.matmul(p, q)
+            val = cls._soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam)
+            if val < tol:
+                autovalores = matriz
+                return p, autovalores
+        return None, None
+
+    @staticmethod
+    def _decomposicao_qr(matriz_anterior, tam):
+        QT = np.zeros((tam, tam))
+        R = np.zeros((tam, tam))
+        
+        for j in range(tam):
+            v = matriz_anterior[:, j]
+            for i in range(j):
+                R[i, j] = np.dot(QT[:, i], matriz_anterior[:, j])
+                v -= R[i, j] * QT[:, i]
+            
+            R[j, j] = np.linalg.norm(v)
+            QT[:, j] = v / R[j, j]
+        
+        return QT, R
+
+    @staticmethod
+    def _soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam):
+        soma = 0
+        for i in range(tam):
+            for j in range(i):
+                soma = soma + (matriz[i,j])**2
+        return soma
+
 
 np.set_printoptions(precision=6, suppress=True)
+
+################################################
+# ================= TAREFA 11 =================#
+################################################
 def tarefa11():
     matriz_1 = np.array([[5, 2, 1],
                          [2, 3, 1],
@@ -163,7 +209,11 @@ def tarefa11():
         print()
     print("\n")
 
-def tarefa12():
+
+################################################
+# ================= TAREFA 12 =================#
+################################################
+def tarefa12_hh():
     matriz_3 = np.array([[40, 8, 4, 2, 1],
                          [8, 30, 12, 6, 2],
                          [4, 12, 20, 1, 2],
@@ -196,7 +246,21 @@ def tarefa12():
         print()
     print("\n")
 
+def tarefa12_qr():
+    matriz_3 = np.array([[40, 8, 4, 2, 1],
+                         [8, 30, 12, 6, 2],
+                         [4, 12, 20, 1, 2],
+                         [2, 6, 1, 25, 4],
+                         [1, 2, 2, 4, 5]])
+    #p, autovalores = AutoValoresVetores.qr(matriz_3)
+    #autovalores = np.diag(autovalores)
+
+    matriz_3_barra, matriz_householder = AutoValoresVetores.householder(matriz_3)
+    p, autovalores = AutoValoresVetores.qr(matriz_3_barra)
+    hp = np.matmul(matriz_householder, p)
+    print(hp)
 
 if __name__ == '__main__':
     #tarefa11()
-    tarefa12()
+    #tarefa12_hh()
+    tarefa12_qr()
