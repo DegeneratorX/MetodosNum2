@@ -40,8 +40,12 @@ $
 
 # Método da Potência Regular
 
-O método da potência busca encontrar numericamente o autovalor dominante de uma matriz e o autovetor associado a esse autovalor.
+O método da potência regular busca encontrar numericamente o autovalor dominante de uma matriz e o autovetor associado a esse autovalor.
 
-![](2023-06-11-15-07-49.png)
+![](2023-06-21-17-17-30.png)
 
 # Método da Potência Inversa
+
+O método da potência inversa busca encontrar numericamente o autovalor mínimo de uma matriz e o autovetor associado a esse autovalor.
+
+![](2023-06-21-17-18-45.png)

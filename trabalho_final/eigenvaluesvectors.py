@@ -261,6 +261,6 @@ def tarefa12_qr():
     print(hp)
 
 if __name__ == '__main__':
-    #tarefa11()
+    tarefa11()
     #tarefa12_hh()
-    tarefa12_qr()
+    #tarefa12_qr()
