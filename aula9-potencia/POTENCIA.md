@@ -48,4 +48,14 @@ O método da potência regular busca encontrar numericamente o autovalor dominan
 
 O método da potência inversa busca encontrar numericamente o autovalor mínimo de uma matriz e o autovetor associado a esse autovalor.
 
-![](2023-06-21-17-18-45.png)
+![](2023-06-22-17-19-34.png)
+
+# Método da Potência com Deslocamento
+
+O método da potência com deslocamento trabalha com chutes iniciais $\lambda _{chute}$ para procurar autovalores intermediários e seus respectivos autovetores. Os chutes normalmente são os valores dentro do intervalo $[\lambda _{min}, \lambda _{max}]$.
+
+Se eu sei o autovalor mínimo e dominante, eu posso deslocar o $\lambda$ a partir do $\lambda _{min}$ e ir iterando chutes até o autovalor máximo, para encontrar um possível autovalor intermediário nesse intervalo.
+
+> Nota: se a matriz for 2x2, os dois autovalores automaticamente são o dominante e o mínimo (podendo inclusive ser iguais), não havendo valores intermediários. Ou existe a possibilidade dela não possuir autovalores caso não seja diagonalizável. Ou seja, não existe autovalor quando não há solução para $Ax = \lambda x$. Se a matriz for 3x3 ou maior, pode (mas não obrigatoriamente) existir autovalores intermediários.
+
+![](2023-06-22-17-20-41.png)
