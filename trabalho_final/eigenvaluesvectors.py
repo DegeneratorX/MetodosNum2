@@ -222,10 +222,6 @@ def tarefa12_hh():
     
     matriz_3_barra, matriz_householder = AutoValoresVetores.householder(matriz_3)
     
-    dominante_matriz_3 = AutoValoresVetores.potencia_regular(matriz_3_barra)
-    minimo_matriz_3 = AutoValoresVetores.potencia_inversa(matriz_3_barra)
-    vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
-
     print("============MATRIZ 3=============")
     for i in matriz_3:
         print(i)
@@ -238,11 +234,18 @@ def tarefa12_hh():
     for i in matriz_householder:
         print(i)
     print()
+
+    dominante_matriz_3 = AutoValoresVetores.potencia_regular(matriz_3_barra)
+    minimo_matriz_3 = AutoValoresVetores.potencia_inversa(matriz_3_barra)
+    vetor_de_deslocamentos_matriz_3 = [np.floor(minimo_matriz_3[0]), 15.0, 27.0, 38.0, np.ceil(dominante_matriz_3[0])]
+
+    print("============AUTOVALORES E AUTOVETORES DE MATRIZ 3 E MATRIZ 3 BARRA=============")
     for deslocamento in vetor_de_deslocamentos_matriz_3:
         autovalor, autovetor = AutoValoresVetores.potencia_com_deslocamento(matriz_3_barra, deslocamento)
         print(f"Deslocamento: {deslocamento}")
-        print(f"Autovalor: {autovalor}")
-        print(f"Autovetor associado: {autovetor}")
+        print(f"Autovalor Matriz 3 (e Matriz 3 barra): {autovalor}")
+        print(f"Autovetor na Matriz 3 barra: \n{autovetor}")
+        print(f"Autovetor na Matriz 3 encontrado pelo produto da matriz hh com autovetor da matriz barra: \n{np.matmul(matriz_householder, np.transpose(autovetor))}")
         print()
     print("\n")
 
@@ -261,6 +264,6 @@ def tarefa12_qr():
     print(hp)
 
 if __name__ == '__main__':
-    tarefa11()
+    #tarefa11()
     #tarefa12_hh()
-    #tarefa12_qr()
+    tarefa12_qr()
