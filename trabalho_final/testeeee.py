@@ -63,59 +63,55 @@ class AutoValoresVetores:
     
     @classmethod
     def householder(cls, matriz):
-        tam = matriz.shape[0] # (linha 1)
-        matriz_householder = np.eye(tam) # (linha 1)
-        matriz_anterior = matriz # (linha 2)
-        for i in range(tam-2): # (linha 3)
-            householder_i = cls._matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i) # (linha 4)
-            matriz = np.matmul(np.matmul(np.transpose(householder_i), matriz_anterior), householder_i) # (linha 5)
-            matriz_anterior = matriz # (linha 6)
-            matriz_householder = np.matmul(matriz_householder, householder_i) # (linha 7)
-        return matriz, matriz_householder # (linha 8, linha 9)
+        tam = matriz.shape[0] # (passo 1)
+        matriz_householder = np.eye(tam) # (passo 1)
+        matriz_anterior = matriz # (passo 2)
+        for i in range(tam-2):
+            householder_i = cls._matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i)
+            matriz = np.matmul(np.matmul(np.transpose(householder_i), matriz_anterior), householder_i)
+            matriz_anterior = matriz
+            matriz_householder = np.matmul(matriz_householder, householder_i)
+        return matriz, matriz_householder
 
     @staticmethod
     def _matriz_householder_com_coluna_i_da_matriz_anterior(matriz_anterior, i):
         tam = matriz_anterior.shape[0]
-        w = np.zeros(tam) # (linha 1)
-        w_linha = np.zeros(tam) # (linha 2)
+        w = np.zeros(tam)
+        w_linha = np.zeros(tam)
 
-        w[i+1:tam] = matriz_anterior[i+1:tam,i] # (linha 4)
+        w[i+1:tam] = matriz_anterior[i+1:tam,i]
 
-        w_linha[i+1] = np.linalg.norm(w) # (linha 5, linha 6)
+        w_linha[i+1] = np.linalg.norm(w)
 
-        n = w - w_linha # (linha 7)
-        n = n/np.linalg.norm(n) # (linha 8)
-
+        n = w - w_linha
+        n = n/np.linalg.norm(n)
         n = [[i] for i in n] # Recoloco os valores em formato [[a], [b], [c]]...
         # ...assim n fica [[a], [b], [c]] (coluna) e n transposto fica [[a, b, c]] (linha).
 
-        householder_i = np.eye(tam) - 2*np.matmul(n, np.transpose(n)) # (linha 9)
-        return householder_i # (linha 10)
+        householder_i = np.eye(tam) - 2*np.matmul(n, np.transpose(n))
+        return householder_i
 
     @classmethod
-    def qr(cls, matriz, tridiagonalizada=False, tol=10e-6):
+    def qr(cls, matriz, tol=10e-6):
         tam = matriz.shape[0]
         p = np.eye(tam)
         val = 100
         matriz_anterior = deepcopy(matriz)
-        k = 0
-        while val > tol:
-            if tridiagonalizada:
-                q, r = cls._decomposicao_qr_tridiagonal(matriz_anterior, tam)
-            else: 
-                q, r = cls.decomposicaoQR(matriz_anterior)
+
+        converge = True
+        while converge:
+            q, r = cls._decomposicao_qr(matriz_anterior, tam)
             matriz = np.matmul(r, q)
             matriz_anterior = deepcopy(matriz)
             p = np.matmul(p, q)
             val = cls._soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam)
-            print(f"(1.iii) Matriz_3 após a iteração {k}: {matriz}")
-            k += 1
-
-        autovalores = matriz
-        return p, autovalores
+            if val < tol:
+                autovalores = matriz
+                return p, autovalores
+        return None, None
 
     @staticmethod
-    def _decomposicao_qr_tridiagonal(matriz_anterior, tam):
+    def _decomposicao_qr(matriz_anterior, tam):
         QT = np.zeros((tam, tam))
         R = np.zeros((tam, tam))
         
@@ -129,44 +125,6 @@ class AutoValoresVetores:
             QT[:, j] = v / R[j, j]
         
         return QT, R
-
-    @staticmethod
-    def decomposicaoQR(matriz):
-        tam = matriz.shape[0]
-        Q = np.eye(tam)
-        R = deepcopy(matriz).astype(float)  # Convert R to float type
-
-        for i in range(tam - 1):
-            u = deepcopy(R[i:, i])
-            u[0] += np.sign(u[0]) * np.linalg.norm(u)
-            u = u / np.linalg.norm(u)
-
-            R[i:, i:] -= 2 * np.outer(u, u.dot(R[i:, i:]))
-
-            Q[i:, :] -= 2 * np.outer(u, u.dot(Q[i:, :]))
-
-        return Q, R
-
-    @staticmethod
-    def matriz_jacobi(A,i,j,n):
-        e = 10E-15
-        J = np.eye(n)
-        if abs(A[i,j]) <= e:
-            return J
-        if abs(A[j,j]) <= e: 
-            if A[i,j] < 0:
-                theta = np.pi/2
-            else:
-                theta = -np.pi/2
-        else:
-            theta = np.arctan(-A[i,j]/A[j,j])
-            
-        J[i,i] = np.cos(theta)
-        J[j,j] = np.cos(theta)
-        J[i,j] = np.sin(theta)
-        J[j,i] = -np.sin(theta)
-        
-        return J
 
     @staticmethod
     def _soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam):
@@ -297,24 +255,13 @@ def tarefa12_qr():
                          [4, 12, 20, 1, 2],
                          [2, 6, 1, 25, 4],
                          [1, 2, 2, 4, 5]])
-    print("============AUTOVALORES E AUTOVETORES DA MATRIZ 3 SEM TRIDIAGONAL=============")
-    autovetores_p, autovalores = AutoValoresVetores.qr(matriz_3, tridiagonalizada=False)
+    #p, autovalores = AutoValoresVetores.qr(matriz_3)
+    #autovalores = np.diag(autovalores)
 
-    print(f"(1.i) Matriz 3 barra (equivale ao A barra, são os autovalores diagonalizados): \n {autovalores}")
-    print(f"(1.ii) Matriz acumulada P = Q1*Q2*Q3*... (é uma matriz composta por autovetores para cada autovalor):\n {autovetores_p}")
-    
-    print("(1.iv) Pares de autovalores e autovetores da Matriz 3:")
-    for i in range(matriz_3.shape[0]):
-        print(f"Autovalor Matriz 3: {autovalores[i][i]}")
-        print(f"Autovetor associado: {autovetores_p[i]}")
-
-
-    print("============AUTOVALORES E AUTOVETORES DA MATRIZ 3 COM TRIDIAGONAL=============")
     matriz_3_barra, matriz_householder = AutoValoresVetores.householder(matriz_3)
-    autovetores_p, autovalores = AutoValoresVetores.qr(matriz_3_barra, tridiagonalizada=True)
-    
-    print(f"(2.ii) Matriz acumulada P = Q1*Q2*Q3*...:\n {autovetores_p}")
-    print(f"(2.iii) Matriz H*P resultante:\n {np.matmul(matriz_householder, autovetores_p)}")
+    p, autovalores = AutoValoresVetores.qr(matriz_3_barra)
+    hp = np.matmul(matriz_householder, p)
+    print(hp)
 
 if __name__ == '__main__':
     #tarefa11()
