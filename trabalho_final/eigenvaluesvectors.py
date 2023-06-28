@@ -100,73 +100,71 @@ class AutoValoresVetores:
         matriz_anterior = deepcopy(matriz)
         k = 0
         while val > tol:
-            if tridiagonalizada:
-                q, r = cls._decomposicao_qr_tridiagonal(matriz_anterior, tam)
+            if not tridiagonalizada:
+                q, r = cls._decomposicao_qr_regular(matriz_anterior, tam)
             else: 
-                q, r = cls.decomposicaoQR(matriz_anterior)
+                q, r = cls._decomposicao_qr_tridiagonal(matriz_anterior, tam)
+
             matriz = np.matmul(r, q)
             matriz_anterior = deepcopy(matriz)
             p = np.matmul(p, q)
             val = cls._soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam)
-            print(f"(1.iii) Matriz_3 após a iteração {k}: {matriz}")
+            print()
+            print(f"ITERAÇÃO {k}: (1.iii) Matriz_3 após a iteração:\n {matriz}")
             k += 1
 
         autovalores = matriz
         return p, autovalores
 
+    @classmethod
+    def _decomposicao_qr_regular(cls, matriz_anterior, tam):
+        qt = np.eye(tam)
+        r_anterior = matriz_anterior
+        for j in range(tam-1):
+            for i in range(j+1, tam):
+                jota = cls.matriz_jacobi_baseada_no_elemento_ij_de_R_velha(r_anterior, i, j, tam)
+                r = jota @ (r_anterior)
+                r_anterior = r[:]
+                qt = jota @ (qt)
+
+        return qt.transpose(), r
+    
     @staticmethod
     def _decomposicao_qr_tridiagonal(matriz_anterior, tam):
-        QT = np.zeros((tam, tam))
-        R = np.zeros((tam, tam))
+        qt = np.zeros((tam, tam))
+        r = np.zeros((tam, tam))
         
         for j in range(tam):
             v = matriz_anterior[:, j]
             for i in range(j):
-                R[i, j] = np.dot(QT[:, i], matriz_anterior[:, j])
-                v -= R[i, j] * QT[:, i]
+                r[i, j] = np.dot(qt[:, i], matriz_anterior[:, j])
+                v -= r[i, j] * qt[:, i]
             
-            R[j, j] = np.linalg.norm(v)
-            QT[:, j] = v / R[j, j]
+            r[j, j] = np.linalg.norm(v)
+            qt[:, j] = v / r[j, j]
         
-        return QT, R
+        return qt, r
 
     @staticmethod
-    def decomposicaoQR(matriz):
-        tam = matriz.shape[0]
-        Q = np.eye(tam)
-        R = deepcopy(matriz).astype(float)  # Convert R to float type
-
-        for i in range(tam - 1):
-            u = deepcopy(R[i:, i])
-            u[0] += np.sign(u[0]) * np.linalg.norm(u)
-            u = u / np.linalg.norm(u)
-
-            R[i:, i:] -= 2 * np.outer(u, u.dot(R[i:, i:]))
-
-            Q[i:, :] -= 2 * np.outer(u, u.dot(Q[i:, :]))
-
-        return Q, R
-
-    @staticmethod
-    def matriz_jacobi(A,i,j,n):
-        e = 10E-15
-        J = np.eye(n)
-        if abs(A[i,j]) <= e:
-            return J
-        if abs(A[j,j]) <= e: 
-            if A[i,j] < 0:
+    def matriz_jacobi_baseada_no_elemento_ij_de_R_velha(matriz_anterior, i, j, tam):
+        tol = 10e-6
+        jota = np.eye(tam)
+        if abs(matriz_anterior[i,j]) <= tol:
+            return jota
+        if abs(matriz_anterior[j,j]) <= tol: 
+            if matriz_anterior[i,j] < 0:
                 theta = np.pi/2
             else:
                 theta = -np.pi/2
         else:
-            theta = np.arctan(-A[i,j]/A[j,j])
+            theta = np.arctan(-matriz_anterior[i,j]/matriz_anterior[j,j])
             
-        J[i,i] = np.cos(theta)
-        J[j,j] = np.cos(theta)
-        J[i,j] = np.sin(theta)
-        J[j,i] = -np.sin(theta)
+        jota[i,i] = np.cos(theta)
+        jota[j,j] = np.cos(theta)
+        jota[i,j] = np.sin(theta)
+        jota[j,i] = -np.sin(theta)
         
-        return J
+        return jota
 
     @staticmethod
     def _soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam):
@@ -300,21 +298,21 @@ def tarefa12_qr():
     print("============AUTOVALORES E AUTOVETORES DA MATRIZ 3 SEM TRIDIAGONAL=============")
     autovetores_p, autovalores = AutoValoresVetores.qr(matriz_3, tridiagonalizada=False)
 
-    print(f"(1.i) Matriz 3 barra (equivale ao A barra, são os autovalores diagonalizados): \n {autovalores}")
-    print(f"(1.ii) Matriz acumulada P = Q1*Q2*Q3*... (é uma matriz composta por autovetores para cada autovalor):\n {autovetores_p}")
+    print(f"(1.i) Matriz 3 barra (equivale ao A barra, são os autovalores diagonalizados): \n {autovalores}\n")
+    print(f"(1.ii) Matriz acumulada P = Q1*Q2*Q3*... (é uma matriz composta por autovetores para cada autovalor):\n {autovetores_p}\n")
     
     print("(1.iv) Pares de autovalores e autovetores da Matriz 3:")
     for i in range(matriz_3.shape[0]):
         print(f"Autovalor Matriz 3: {autovalores[i][i]}")
-        print(f"Autovetor associado: {autovetores_p[i]}")
+        print(f"Autovetor associado: {autovetores_p[i]}\n")
 
 
     print("============AUTOVALORES E AUTOVETORES DA MATRIZ 3 COM TRIDIAGONAL=============")
     matriz_3_barra, matriz_householder = AutoValoresVetores.householder(matriz_3)
     autovetores_p, autovalores = AutoValoresVetores.qr(matriz_3_barra, tridiagonalizada=True)
     
-    print(f"(2.ii) Matriz acumulada P = Q1*Q2*Q3*...:\n {autovetores_p}")
-    print(f"(2.iii) Matriz H*P resultante:\n {np.matmul(matriz_householder, autovetores_p)}")
+    print(f"(2.ii) Matriz acumulada P = Q1*Q2*Q3*...:\n {autovetores_p}\n")
+    print(f"(2.iii) Matriz H*P resultante:\n {np.matmul(matriz_householder, autovetores_p)}\n")
 
 if __name__ == '__main__':
     #tarefa11()
