@@ -1,5 +1,1 @@
-import numpy as np
-
-mat = 5*np.eye(3)
-
-print(mat)
+print(4+(4+0+1+3+3+9)%4)

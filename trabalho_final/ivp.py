@@ -38,21 +38,28 @@ class ProblemaValorInicial:
 
 
 def main():
-    y0 = 200
-    v0 = 5
-    k = 0.25
-    m = 2
-    
-    for i in range(1,5):
-        dt = 10 ** (-i)
-        print('--'*8+f' delta t = {dt} '+'--'*8+'\n')
-        altura_maxima, v, tempo_total, tempo_altura_maxima, iteracoes = ProblemaValorInicial.euler_explicito(dt, v0, y0, k, m)
-        print("Altura máxima da trajetória = ", altura_maxima ,"metros")
-        print("Tempo decorrido até a altura máxima = ", tempo_altura_maxima, "segundos")
-        print("Tempo total até a queda no mar = ", tempo_total, "segundos")
-        print("velocidade no momento do impacto com o mar = ", v, "m/s")
-        print(f"numero de iterações: {iteracoes}")
 
+    velocidade_inicial = 5
+    altura_inicial = 200
+
+    k = 0.25
+    massa = 2
+    
+    for i in range(1,6):
+        delta_t = 10**(-i)
+        print(f"DELTA T: {delta_t}")
+        altura_maxima, velocidade_no_impacto, tempo_total, tempo_altura_maxima, iteracoes = ProblemaValorInicial.euler_explicito(delta_t, velocidade_inicial, altura_inicial, k, massa)
+
+        print(f"numero de iterações: {iteracoes}")
+        print("===========================================")
+
+        print(f"Altura máxima alcançada: {altura_maxima}m.")
+        print(f"Tempo exato quando essa altura máxima é atingida: {tempo_altura_maxima}s")
+        print(f"Tempo total da trajetória até atingir o mar = {tempo_total}s")
+        print(f"Velocidade exata do objeto quando atinge o mar: {velocidade_no_impacto}m/s")
+        print(f"Massa do objeto: {massa}kg.")
+        print(f"Constante k utilizada: {k}kg/s.")
+        print()
 
 if __name__ == "__main__":
     main()
