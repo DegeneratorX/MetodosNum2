@@ -1,4 +1,4 @@
-## Q2
+# Q2
 
 O movimento do carrinho é dado pela solução da seguinte equação diferencial:
 
@@ -25,6 +25,82 @@ No instante $t = 0$:
 Determine os valores de $x$ (deslocamento) e $v$ (velocidade) no instante de tempo $t = 1.2s$, usando o método de Runge-Kutta de quarta ordem. Defina uma tolerância $0 < \epsilon < 1$, escolha um valor para $\Delta t$ e calcule a solução várias vezes (sempre dividindo o valor de $\Delta t$ por 10) até que o erro relativo de $x(1.2)$ em duas soluções sucessivas seja menor do que a tolerância $\epsilon$.
 
 Faça mais uma vez para $m = 2$, $k = 4$, $\xi = 0.05$, $x(0) = 1$, $v(0) = 0$ e $\xi = 0.0000001$ e escreva os valores de $x(1.2)$ e $v(1.2)$.
+
+### Solução
+
+Para $m = 2$, $k = 4$, $\xi = 0.05$, $x(0) = 1$, $v(0) = 0$ e $\epsilon = 0.0000001$
+
+$$\frac{d^2x(t)}{dt^2} + 0.1\sqrt{2} \frac{dx(t)}{dt}+2x(t) = \left\{ \begin{array}{cl}
+2t & \ \text{ se } t \in [0,0.5] \\
+2(1-t) & \ \text{ se } t \in [0.5,1.0] \\
+0 & t > 1
+\end{array} \right.$$
+
+Passo 1: Transformar a equação diferencial do estado S
+
+$S = 
+\begin{pmatrix}
+x \\
+v
+\end{pmatrix}$, 
+$S_0 = 
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+$
+
+$$\frac{dS}{dt} = \begin{pmatrix}
+\frac{dx}{dt} \\
+\frac{dv}{dt}
+\end{pmatrix} = 
+\begin{pmatrix}
+v \\
+\frac{d^2x}{dt^2}
+\end{pmatrix}
+= \mathfrak{I}(S,t) = 
+\begin{pmatrix}
+v \\
+\left\{ \begin{array}{cl}
+2t - 0.1\sqrt{2}v - 2x & \ \text{ se } t \in [0,0.5] \\
+2(1-t) - 0.1\sqrt{2}v - 2x & \ \text{ se } t \in [0.5,1.0] \\
+-0.1\sqrt{2}v-2x & t > 1
+\end{array} \right.
+\end{pmatrix}
+$$
+
+Passo 2: Resolver pelo método de Runge-Kutta de quarta ordem, usando
+
+$S_{i+1} = S_i + \frac{\Delta t}{6}(\mathfrak{I}_1 + 2\mathfrak{I}_2 + 2\mathfrak{I}_3 + \mathfrak{I}_4)$
+
+onde
+
+$\mathfrak{I}_1 = \mathfrak{I}(S_i, t_i)$
+
+$\overline{S_2} = S_i + \frac{\Delta t}{2}\mathfrak{I}_1$
+
+$\mathfrak{I}_2 = \mathfrak{I}(\overline{S_2},t_i + \frac{\Delta t}{2})$
+
+$\overline{S_3} = S_i + \frac{\Delta t}{2}\mathfrak{I}_2$
+
+$\mathfrak{I}_3 = \mathfrak{I}(\overline{S_3},t_i + \frac{\Delta t}{2})$
+
+$\overline{S_4} = S_i + \Delta t\mathfrak{I}_3$
+
+$\mathfrak{I}_4 = \mathfrak{I}(\overline{S_4},t_i + \Delta t)$
+
+Para $m = 2$, $k = 4$, $\xi = 0.05$, $x(0) = 1$, $v(0) = 0$ e $\epsilon = 0.0000001$,
+
+$x(1.2) = 2.22554$ e $v(1.2) = -2.02273$
+
+
+Faça em python a solução dessa questão até chegar nos resultados $x(1.2) = 2.22554$ e $v(1.2) = -2.02273$ utilizando como base a solução dessa questão e a tolerância $\epsilon = 0.0000001$,.
+
+
+
+
+
+
 
 # Q3
 
