@@ -40,10 +40,10 @@ def f(t):
         return 0
 
 # Parametros iniciais
-m = 1
+m = 2
 k = 4
 xi = 0.05
-x0 = 0
+x0 = 1
 v0 = 0
 t_final = 1.2
 
