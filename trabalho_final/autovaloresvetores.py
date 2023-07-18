@@ -120,10 +120,9 @@ class AutoValoresVetores:
             p = np.matmul(p, q) # (linha 8)
             val = cls._soma_dos_quadrados_dos_termos_abaixo_da_diagonal(matriz, tam) # (linha 9)
 
-            print()
-            print(f"ITERAÇÃO {k}: (1.iii e 2.i) Matriz_3 após a iteração:") # Requisito da questão 1.iii
-            for i in matriz:
-                print(i)
+            #print(f"ITERAÇÃO {k}: (1.iii e 2.i) Matriz_3 após a iteração:") # Requisito da questão 1.iii
+            #for i in matriz:
+            #    print(i)
             k += 1
 
         print(f"\n(1.i) Matriz 3 barra (equivale ao A barra, mas contém os autovalores diagonalizados):")
@@ -324,11 +323,11 @@ def tarefa12_qr():
     print("==================================")
     print()
 
-    matriz_3 = np.array([[40, 8, 4, 2, 1],
-                         [8, 30, 12, 6, 2],
-                         [4, 12, 20, 1, 2],
-                         [2, 6, 1, 25, 4],
-                         [1, 2, 2, 4, 5]])
+    matriz_3 = np.array([[100, 30, -25, 15, 5],
+                         [30, 150, 20, 10, -15],
+                         [-25, 20, 200, -10, 13],
+                         [15, 10, -10, 300, 50],
+                         [5, -15, 13, 50, 250]])
     print("============AUTOVALORES E AUTOVETORES DA MATRIZ 3 SEM TRIDIAGONAL=============")
     autovetores_p, autovalores = AutoValoresVetores.qr(matriz_3, tridiagonalizada=False)
 
@@ -361,5 +360,5 @@ def tarefa12_qr():
 
 if __name__ == '__main__':
     #tarefa11()
-    tarefa12_hh()
+    #tarefa12_hh()
     tarefa12_qr()

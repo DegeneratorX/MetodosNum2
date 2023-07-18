@@ -159,12 +159,30 @@ def main_euler():
     k = 0.25
     massa = 2
 
-    for i in range(1,6):
+    print("=========== EULER EXPLÍCITO =============")
+    for i in range(1, 5):
         delta_t = 10**(-i)
-
         print()
         print(f"DELTA T: {delta_t}")
-        altura_maxima, velocidade_no_impacto, tempo_total, tempo_altura_maxima, iteracoes = ProblemaValorInicial.euler_implicito(delta_t, velocidade_inicial, altura_inicial, k, massa)
+        altura_maxima, velocidade_no_impacto, tempo_total, tempo_altura_maxima, iteracoes = ProblemaValorInicial.euler_explicito(delta_t, velocidade_inicial, altura_inicial, k, massa)
+
+        print(f"numero de iterações: {iteracoes}")
+        print("===========================================")
+
+        print(f"Altura máxima alcançada: {altura_maxima:8f}m.")
+        print(f"Tempo exato quando essa altura máxima é atingida: {tempo_altura_maxima:8f}s")
+        print(f"Tempo total da trajetória até atingir o mar = {tempo_total:8f}s")
+        print(f"Velocidade exata do objeto quando atinge o mar: {velocidade_no_impacto:8f}m/s")
+        print(f"Massa do objeto: {massa}kg.")
+        print(f"Constante k utilizada: {k}kg/s.")
+        print()
+
+    print("=========== EULER IMPLÍCITO =============")
+    for i in range(1, 5):
+        delta_t = 10**(-i)
+        print()
+        print(f"DELTA T: {delta_t}")
+        altura_maxima, velocidade_no_impacto, tempo_total, tempo_altura_maxima, iteracoes = ProblemaValorInicial.euler_explicito(delta_t, velocidade_inicial, altura_inicial, k, massa)
 
         print(f"numero de iterações: {iteracoes}")
         print("===========================================")
@@ -183,8 +201,8 @@ def main_rk():
 
     k = 0.25
     massa = 2
-    
-    for i in range(1,6):
+    print("=============== MÉTODO DE RUNGE-KUTTA ================")
+    for i in range(1,5):
         delta_t = 10**(-i)
 
         print()
