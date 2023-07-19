@@ -1,33 +1,3 @@
-'''import numpy as np
-import cv2
-
-def apply_gaussian_filter(image, kernel_size):
-    return cv2.GaussianBlur(image, (kernel_size, kernel_size), 0)
-
-def apply_laplacian_filter(image):
-    return cv2.Laplacian(image, cv2.CV_64F)
-
-# Carregar a imagem de exemplo
-image = cv2.imread('C:/Users/Samsung/tarefa_1.2/imagem7.jpg', cv2.IMREAD_GRAYSCALE)
-
-# Suavizar a imagem aplicando um filtro Gaussiano
-smoothed_image = apply_gaussian_filter(image, kernel_size=5)
-
-# Aplicar o filtro convolucional de Laplace
-laplacian_image = apply_laplacian_filter(smoothed_image)
-
-# Gerar a matriz B
-tolerance = 10.6 # quanto maior a tolerancia, menos pixels brancos.
-binary_image = np.where(np.abs(laplacian_image) > tolerance, 255, 0).astype(np.uint8)
-
-# Exibir a imagem final
-cv2.imshow('Final Image', binary_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-'''
-
-
-
 import numpy as np
 import cv2
 
